@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/AdrienEtienne/scriptor.svg?branch=develop)](https://travis-ci.org/AdrienEtienne/scriptor)
+[![Build Status](https://travis-ci.org/AdrienEtienne/scriptor.svg?branch=develop)](https://travis-ci.org/AdrienEtienne/scriptor) [![Coverage Status](https://coveralls.io/repos/github/AdrienEtienne/scriptor/badge.svg?branch=develop)](https://coveralls.io/github/AdrienEtienne/scriptor?branch=develop)
 
 # scriptor
 

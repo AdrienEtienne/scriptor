@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/AdrienEtienne/scriptor.svg?branch=develop)](https://travis-ci.org/AdrienEtienne/scriptor)
+
 # scriptor
 
 > A demo web app showing scripting toolsweb app

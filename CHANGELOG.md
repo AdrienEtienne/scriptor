@@ -11,5 +11,6 @@ All notable changes to this project will be documented in this file.
 - Add express server for production purpose
 - Add Bootstrap V4
 - Configuration for Travis-CI
+- Configuration for Coveralls
 
 [Unreleased]: https://github.com/AdrienEtienne/scriptor/compare/6fcb87...HEAD

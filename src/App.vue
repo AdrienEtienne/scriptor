@@ -2,16 +2,18 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <Footer/>
+    <footer>
+      <footer-bootstrap/>
+    </footer>
   </div>
 </template>
 
 <script>
-import Footer from './components/Footer'
+import FooterBootstrap from './components/FooterBootstrap'
 export default {
   name: 'app',
   components: {
-    Footer
+    FooterBootstrap
   }
 }
 </script>
@@ -24,5 +26,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+footer {
+  margin-top: 40px;
 }
 </style>

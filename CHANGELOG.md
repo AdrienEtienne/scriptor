@@ -13,4 +13,8 @@ All notable changes to this project will be documented in this file.
 - Configuration for Travis-CI
 - Configuration for Coveralls
 
+### Fixed
+
+- Sup warning element id used on Footer
+
 [Unreleased]: https://github.com/AdrienEtienne/scriptor/compare/6fcb87...HEAD

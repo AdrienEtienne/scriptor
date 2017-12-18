@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - Add Bootstrap V4
 - Configuration for Travis-CI
 - Configuration for Coveralls
+- Add Vuex
 
 ### Fixed
 

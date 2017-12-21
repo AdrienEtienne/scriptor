@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     variant () {
-      let variant = 'light'
+      let variant = 'dark'
       if (this.type === 'worker') variant = 'warning'
       if (this.type === 'task') variant = 'primary'
       return variant

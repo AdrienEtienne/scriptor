@@ -120,7 +120,6 @@
     "collectCoverageFrom": [
       "src/**/*.{js,vue}",
       "!src/main.js",
-      "!src/App.vue",
       "!src/router/index.js",
       "!src/router/worker/index.js",
       "!src/store/index.js",

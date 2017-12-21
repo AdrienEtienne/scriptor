@@ -29,9 +29,9 @@ describe('Entity.vue', () => {
   })
 
   describe('variant', () => {
-    it('return light by default', () => {
+    it('return dark by default', () => {
       const wrapper = mount(Component, { propsData })
-      expect(wrapper.find('.badge-light').exists()).toBe(true)
+      expect(wrapper.find('.badge-dark').exists()).toBe(true)
     })
     it('return warning if worker', () => {
       propsData.type = 'worker'

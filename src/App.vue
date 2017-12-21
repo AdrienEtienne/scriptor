@@ -12,7 +12,8 @@
     <b-container>
       <router-view/>
     </b-container>
-    <footer>
+    <footer class="bg-light">
+      <footer-vue/>
       <footer-bootstrap/>
     </footer>
   </div>
@@ -20,10 +21,12 @@
 
 <script>
 import FooterBootstrap from './components/FooterBootstrap'
+import FooterVue from './components/FooterVue'
 export default {
   name: 'app',
   components: {
-    FooterBootstrap
+    'footerBootstrap': FooterBootstrap,
+    'footerVue': FooterVue
   }
 }
 </script>

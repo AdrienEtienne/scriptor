@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <b-navbar type="light" variant="light">
+      <b-container>
+        <b-navbar-brand to="/">Scriptor</b-navbar-brand>
+        <b-navbar-nav>
+          <b-nav-item to="/workers">Workers</b-nav-item>
+        </b-navbar-nav>
+      </b-container>
+    </b-navbar>
+    <br/>
+    <b-container>
+      <router-view/>
+    </b-container>
     <footer>
       <footer-bootstrap/>
     </footer>
@@ -18,14 +28,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 footer {
   margin-top: 40px;

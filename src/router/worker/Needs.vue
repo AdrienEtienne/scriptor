@@ -11,7 +11,7 @@ import Needs from '@/components/Needs'
 
 export default {
   components: {
-    'needs': Needs
+    Needs
   },
   computed: {
     ...mapGetters(['getNeeds', 'getWorkerByName']),

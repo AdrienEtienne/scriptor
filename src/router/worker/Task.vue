@@ -37,7 +37,7 @@ import Entity from '@/components/Entity'
 
 export default {
   components: {
-    'entity': Entity
+    Entity
   },
   computed: {
     ...mapGetters(['getTaskByName', 'getWorkerByName']),

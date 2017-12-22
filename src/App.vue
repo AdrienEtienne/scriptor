@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import FooterApp from './components/FooterApp'
+import FooterApp from '@/components/FooterApp'
 export default {
   name: 'app',
   components: {
-    'footerApp': FooterApp
+    FooterApp
   }
 }
 </script>

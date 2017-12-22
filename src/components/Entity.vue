@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'needs',
+  name: 'Entity',
   props: {
     name: {
       type: String,

@@ -17,7 +17,6 @@
 <script>
 import Entity from '@/components/Entity'
 export default {
-  name: 'Workers',
   components: {
     Entity
   },

@@ -26,7 +26,7 @@ import Entity from '@/components/Entity'
 export default {
   name: 'Home',
   components: {
-    'entity': Entity
+    Entity
   },
   data () {
     return {

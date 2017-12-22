@@ -11,12 +11,10 @@ import Workers from '@/components/Workers'
 
 export default {
   components: {
-    'workers': Workers
+    Workers
   },
   computed: {
-    ...mapGetters({
-      workers: 'workers'
-    })
+    ...mapGetters(['workers'])
   }
 }
 </script>

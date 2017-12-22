@@ -1,9 +1,12 @@
 <template>
   <div>
-    <b-jumbotron header="Scriptor" lead="A user friendly way to write scripts" >
+    <b-jumbotron header="Scriptor" lead="A user friendly way to write scripts" bg-variant="dark" text-variant="light" border-variant="dark">
       <hr/>
-      <p>You can see what scriptor can do today</p>
-      <b-btn variant="primary" to="workers">Workers</b-btn>
+      <p>{{sandboxDescText}}</p>
+      <b-btn variant="light" to="workers">{{sandboxText}}</b-btn>
+      <hr/>
+      <p>{{registryDescText}}</p>
+      <b-btn variant="light" to="workers">{{registryText}}</b-btn>
     </b-jumbotron>
     <b-row>
       <b-col v-for="(el, key) in els" :key="key">
@@ -22,6 +25,7 @@
 </template>
 
 <script>
+import text from '@/text'
 import Entity from '@/components/Entity'
 export default {
   name: 'Home',
@@ -30,6 +34,10 @@ export default {
   },
   data () {
     return {
+      sandboxText: text.SANDBOX,
+      sandboxDescText: text.SANDBOX_DESC_2,
+      registryText: text.REGISTRY,
+      registryDescText: text.REGISTRY_DESC_2,
       els: [{
         title: 'Worker',
         description: 'Can execute many tasks',

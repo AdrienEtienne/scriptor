@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Configuration for Coveralls
 - Add Vuex
 - Add views workers/tasks/needs
+- Modify home vue
 
 ### Fixed
 

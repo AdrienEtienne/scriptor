@@ -12,18 +12,16 @@
     <b-container>
       <router-view/>
     </b-container>
-    <footer>
-      <footer-bootstrap/>
-    </footer>
+    <footer-app/>
   </div>
 </template>
 
 <script>
-import FooterBootstrap from './components/FooterBootstrap'
+import FooterApp from '@/components/FooterApp'
 export default {
   name: 'app',
   components: {
-    FooterBootstrap
+    FooterApp
   }
 }
 </script>
@@ -34,8 +32,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-footer {
-  margin-top: 40px;
 }
 </style>

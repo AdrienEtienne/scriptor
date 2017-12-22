@@ -39,4 +39,17 @@ describe('router worker Tasks.vue', () => {
     })
     expect(wrapper.find('h4 .badge').text()).toEqual('1')
   })
+
+  it('should render needs count if no needs', () => {
+    getTasksMock.mockReturnValue([{
+      name: 'task',
+      description: 'description'
+    }])
+    const wrapper = mount(Component, {
+      store,
+      localVue,
+      mocks: { $route }
+    })
+    expect(wrapper.find('h4 .badge').text()).toEqual('1')
+  })
 })

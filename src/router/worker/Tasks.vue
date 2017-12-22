@@ -11,7 +11,7 @@ import Tasks from '@/components/Tasks'
 
 export default {
   components: {
-    'tasks': Tasks
+    Tasks
   },
   computed: {
     ...mapGetters(['getTasks']),

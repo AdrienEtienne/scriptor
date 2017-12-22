@@ -13,7 +13,7 @@
 <script>
 import Entity from '@/components/Entity'
 export default {
-  name: 'needs',
+  name: 'Needs',
   components: {
     Entity
   },

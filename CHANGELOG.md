@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Add Vuex
 - Add views workers/tasks/needs
 - Modify home vue
+- Add Sandbox page
 
 ### Fixed
 

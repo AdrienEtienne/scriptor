@@ -25,11 +25,11 @@ describe('router worker Workers.vue', () => {
     })
   })
 
-  it('should render worker', () => {
+  it('should render workers count', () => {
     const wrapper = mount(Component, {
       store,
       localVue
     })
-    expect(wrapper.find('h1').text()).toEqual('Workers 1')
+    expect(wrapper.find('h1 > span.badge').text()).toEqual('1')
   })
 })

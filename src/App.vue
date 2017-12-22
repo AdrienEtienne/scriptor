@@ -12,21 +12,16 @@
     <b-container>
       <router-view/>
     </b-container>
-    <footer class="bg-light">
-      <footer-vue/>
-      <footer-bootstrap/>
-    </footer>
+    <footer-app/>
   </div>
 </template>
 
 <script>
-import FooterBootstrap from './components/FooterBootstrap'
-import FooterVue from './components/FooterVue'
+import FooterApp from './components/FooterApp'
 export default {
   name: 'app',
   components: {
-    'footerBootstrap': FooterBootstrap,
-    'footerVue': FooterVue
+    'footerApp': FooterApp
   }
 }
 </script>
@@ -37,8 +32,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-footer {
-  margin-top: 40px;
 }
 </style>

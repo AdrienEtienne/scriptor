@@ -2,7 +2,7 @@
 
 # scriptor
 
-> A demo web app showing scripting toolsweb app
+> A demo showing a scripting tool : scriptor
 
 ## Build Setup
 

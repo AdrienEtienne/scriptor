@@ -1,18 +1,22 @@
 import schema from './validators/schema'
 import functional from './validators/functional'
 import RegistryError from './RegistryError'
+import {
+  setIds,
+  construct
+} from './tools'
 
 class Registry {
   constructor (arr, options = {}) {
     this.options = options
 
-    this._elements = []
+    this._workers = []
 
     this.set(arr)
   }
 
-  get elements () {
-    return this._elements
+  get workers () {
+    return this._workers
   }
 
   set (arr = []) {
@@ -22,7 +26,11 @@ class Registry {
     result = functional(arr)
     if (result.status > 0) throw new RegistryError('Cannot validate functional model', result.errors)
 
-    this._elements = arr
+    let workers
+    workers = setIds(arr)
+    workers = construct(workers)
+
+    this._workers = workers
   }
 }
 

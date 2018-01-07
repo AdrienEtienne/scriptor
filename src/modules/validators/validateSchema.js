@@ -3,60 +3,7 @@ import {
 } from 'jsonschema'
 import ValidationError from './ValidationError'
 import Result from './Result'
-
-const SCHEMA_WORKER = {
-  'id': '/Worker',
-  'type': 'object',
-  'properties': {
-    'name': {'type': 'string'},
-    'tasks': {
-      'type': 'array',
-      'items': {'$ref': '/Task'}
-    }
-  },
-  'required': ['name']
-}
-
-const SCHEMA_TASK = {
-  'id': '/Task',
-  'type': 'object',
-  'properties': {
-    'name': {'type': 'string'},
-    'return': {'type': 'string'},
-    'needs': {
-      'type': 'array',
-      'items': {'$ref': '/Need'}
-    }
-  },
-  'required': ['name']
-}
-
-const SCHEMA_NEED = {
-  'id': '/Need',
-  'type': 'object',
-  'properties': {
-    'name': {'type': 'string'},
-    'worker': {'type': 'string'}
-  },
-  'required': ['name']
-}
-
-const SCHEMA = {
-  'id': '/All',
-  'type': 'object',
-  'properties': {
-    'name': {'type': 'string'},
-    'workers': {
-      'type': 'array',
-      'items': {'$ref': '/Worker'}
-    }
-  }
-}
-
-const v = new Validator()
-v.addSchema(SCHEMA_NEED, '/Need')
-v.addSchema(SCHEMA_TASK, '/Task')
-v.addSchema(SCHEMA_WORKER, '/Worker')
+import * as SCHEMA from './SCHEMA'
 
 export const parseError = (error) => {
   const message = error.message
@@ -86,7 +33,7 @@ export const parseError = (error) => {
   })
 }
 
-export default (toValidate) => {
+export function registry (toValidate) {
   const result = new Result()
 
   if (!(toValidate instanceof Array)) {
@@ -94,9 +41,30 @@ export default (toValidate) => {
   } else if (toValidate.length === 0) {
     throw new ValidationError('You cannot pass an empty Array')
   }
+
+  const v = new Validator()
+  v.addSchema(SCHEMA.NEED, '/Need')
+  v.addSchema(SCHEMA.TASK, '/Task')
+  v.addSchema(SCHEMA.WORKER, '/Worker')
+  v.addSchema(SCHEMA.REGISTRY, '/Registry')
   const validation = v.validate({
     workers: toValidate
-  }, SCHEMA)
+  }, SCHEMA.REGISTRY)
+
+  const errors = []
+  validation.errors.forEach(error => {
+    errors.push(parseError(error))
+  })
+  if (errors.length > 0) result.setErrors(errors)
+
+  return result
+}
+
+export function instruction (schema, obj) {
+  const result = new Result()
+
+  const v = new Validator()
+  const validation = v.validate(obj, schema)
 
   const errors = []
   validation.errors.forEach(error => {

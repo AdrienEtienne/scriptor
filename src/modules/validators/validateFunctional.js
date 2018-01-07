@@ -27,7 +27,7 @@ const workerIsNotDefined = (errors, workers, workerName, ...lstIndex) => {
   return errors
 }
 
-function validate (arr) {
+export function registry (arr) {
   const result = new Result()
   let errors = []
 
@@ -59,5 +59,3 @@ function validate (arr) {
   result.setErrors(errors)
   return result
 }
-
-export default validate

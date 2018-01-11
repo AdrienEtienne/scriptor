@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>
-      <entity type="worker" :name="worker.name" :description="worker.description"/> <small>worker</small>
-    </h1>
-    <p>{{worker.description}}</p>
-    <router-view/>
+    <h3>
+      <entity type="worker" :name="worker.name" :description="worker.description"/>
+    </h3>
+    <br />
+    <router-view />
   </div>
 </template>
 

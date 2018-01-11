@@ -7,7 +7,7 @@
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="ml-auto">
             <b-nav-item to="/sandbox">{{sandboxText}}</b-nav-item>
-            <b-nav-item to="/workers">{{registryText}}</b-nav-item>
+            <b-nav-item to="/registry">{{registryText}}</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-container>

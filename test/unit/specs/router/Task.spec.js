@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/worker/Task'
+import Component from '@/router/registry/Task'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('router worker Task.vue', () => {
+describe('Task.vue', () => {
   let store
   let getTaskByNameMock
   let getWorkerByNameMock
@@ -49,17 +49,11 @@ describe('router worker Task.vue', () => {
       localVue,
       mocks: { $route }
     })
-    expect(wrapper.find('h3 .badge').text()).toEqual('task')
-  })
-
-  it('should render function example', () => {
-    const wrapper = mount(Component, {
-      store,
-      localVue,
-      mocks: { $route }
-    })
-    expect(wrapper.findAll('p').at(1).text()
-      .replace(/\n/g, '').replace(/\s/g, ''))
-    .toEqual('workercantaskusing:need')
+    const text = wrapper.find('h3').text()
+    expect(text).toContain('worker')
+    expect(text).toContain('can')
+    expect(text).toContain('task')
+    expect(text).toContain('with')
+    expect(text).toContain('need')
   })
 })

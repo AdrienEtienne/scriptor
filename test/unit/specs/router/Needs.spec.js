@@ -1,11 +1,11 @@
 import { mount, shallow, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/worker/Needs'
+import Component from '@/router/registry/Needs'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('router worker Needs.vue', () => {
+describe('Needs.vue', () => {
   let store
   let getNeedsMock
   let getWorkerByNameMock

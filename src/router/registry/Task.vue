@@ -1,32 +1,28 @@
 <template>
   <div>
     <h3>
+      <router-link :to="{ name: 'worker', params: { worker: worker.name }}">
+        <entity
+          type="worker"
+          :name="worker.name"
+          :description="worker.description"/>
+      </router-link>
+      can
       <entity
         v-if="task"
         type="task"
         :name="task.name"
-        :description="task.description"/> <small>task</small>
-    </h3>
-    <p>{{task.description}}</p>
-    <p>
-      <entity
-        type="worker"
-        :name="worker.name"
-        :description="worker.description"/>
-      can
-      <entity
-        type="task"
-        :name="task.name"
         :description="task.description"/>
-      using :
+      with
       <span v-if="task.needs.length === 0">Nothing</span>
       <entity
         v-bind:key="key"
         v-for="(need, key) in task.needs"
         type="need"
         :name="need.name"
-        :description="need.description"/>
-    </p>
+        :description="need.description"/> 
+    </h3>
+    <br />
     <router-view/>
   </div>
 </template>

@@ -2,7 +2,7 @@ var tableCmds = require('../commands/table')
 
 module.exports = {
   elements: {
-    title: 'h1 span'
+    title: 'h3'
   },
   commands: [
     tableCmds

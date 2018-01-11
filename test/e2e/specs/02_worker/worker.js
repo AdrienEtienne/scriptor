@@ -9,9 +9,9 @@ const {
 
 module.exports = {
   before: function (browser) {
-    var workers = browser.page.workers()
-    workers.navigate()
-    workers.clickLinkLine(1)
+    var registry = browser.page.registry()
+    registry.navigate()
+    registry.clickLinkLine(1)
   },
   'worker name': function (browser) {
     var worker = browser.page.worker()

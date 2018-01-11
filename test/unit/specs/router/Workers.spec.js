@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/worker/Workers'
+import Component from '@/router/registry/Workers'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('router worker Workers.vue', () => {
+describe('Workers.vue', () => {
   let store
   let workersMock
   let getters
@@ -30,6 +30,6 @@ describe('router worker Workers.vue', () => {
       store,
       localVue
     })
-    expect(wrapper.find('h1 > span.badge').text()).toEqual('1')
+    expect(wrapper.find('h3 > span.badge').text()).toEqual('1')
   })
 })

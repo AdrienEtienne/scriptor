@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/worker/Tasks'
+import Component from '@/router/registry/Tasks'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('router worker Tasks.vue', () => {
+describe('Tasks.vue', () => {
   let store
   let getTasksMock
   let $route

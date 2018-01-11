@@ -4,10 +4,8 @@ module.exports = {
   NEED: 'Need',
   REGISTRY: 'Registry',
   REGISTRY_DESC: 'All that you can do in the sandbox is kept here',
-  REGISTRY_DESC_2: 'You can see more about the current registry',
   SANDBOX: 'Sandbox',
   SANDBOX_DESC: 'This is where the magic happen',
-  SANDBOX_DESC_2: 'You can see what you can do with it here',
 
   WORKER_1: 'IT Guy',
   WORKER_1_DESC: 'A serial coder',

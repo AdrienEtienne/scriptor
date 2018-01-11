@@ -4,6 +4,7 @@
       {{title}} <small class="text-muted">{{description}}</small>
     </h1>
     <hr />
+    <router-view />
   </div>
 </template>
 
@@ -11,11 +12,10 @@
 import text from '@/text.js'
 
 export default {
-  name: 'Sandbox',
   data () {
     return {
-      title: text.SANDBOX,
-      description: text.SANDBOX_DESC
+      title: text.REGISTRY,
+      description: text.REGISTRY_DESC
     }
   }
 }

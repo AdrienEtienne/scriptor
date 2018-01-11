@@ -2,11 +2,16 @@
   <div>
     <b-jumbotron header="Scriptor" lead="A user friendly way to write scripts" bg-variant="dark" text-variant="light" border-variant="dark">
       <hr/>
-      <p>{{sandboxDescText}}</p>
-      <b-btn variant="light" to="workers">{{sandboxText}}</b-btn>
-      <hr/>
-      <p>{{registryDescText}}</p>
-      <b-btn variant="light" to="workers">{{registryText}}</b-btn>
+      <b-row>
+        <b-col>
+          <p>{{sandboxDescText}}</p>
+          <b-btn variant="light" to="sandbox">{{sandboxText}}</b-btn>
+        </b-col>
+        <b-col>
+          <p>{{registryDescText}}</p>
+          <b-btn variant="light" to="registry">{{registryText}}</b-btn>
+        </b-col>
+      </b-row>
     </b-jumbotron>
     <b-row>
       <b-col v-for="(el, key) in els" :key="key">
@@ -35,9 +40,9 @@ export default {
   data () {
     return {
       sandboxText: text.SANDBOX,
-      sandboxDescText: text.SANDBOX_DESC_2,
+      sandboxDescText: text.SANDBOX_DESC,
       registryText: text.REGISTRY,
-      registryDescText: text.REGISTRY_DESC_2,
+      registryDescText: text.REGISTRY_DESC,
       els: [{
         title: 'Worker',
         description: 'Can execute many tasks',

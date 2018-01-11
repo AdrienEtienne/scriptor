@@ -8,17 +8,17 @@ const {
 
 module.exports = {
   before: function (browser) {
-    var workers = browser.page.workers()
-    workers.navigate()
-    workers.clickLinkLine(1)
+    var registry = browser.page.registry()
+    registry.navigate()
+    registry.clickLinkLine(1)
     var worker = browser.page.worker()
     worker.clickLinkLine(2)
   },
   'task name': function (browser) {
-    var task = browser.page.task()
-    task
+    var worker = browser.page.worker()
+    worker
       .expect.element('@title')
-      .text.to.equals(TASK_2)
+      .text.to.equals(`${WORKER_1} can ${TASK_2} with ${NEED_1}`)
   },
   'needs line is well displayed': function (browser) {
     var worker = browser.page.worker()

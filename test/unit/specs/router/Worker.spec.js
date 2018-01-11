@@ -1,11 +1,11 @@
 import { mount, createLocalVue } from 'vue-test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/worker/Worker'
+import Component from '@/router/registry/Worker'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('router worker Worker.vue', () => {
+describe('Worker.vue', () => {
   let store
   let getWorkerByNameMock
   let $route
@@ -37,6 +37,6 @@ describe('router worker Worker.vue', () => {
       localVue,
       mocks: { $route }
     })
-    expect(wrapper.find('h1').text()).toEqual('worker worker')
+    expect(wrapper.find('h3').text()).toEqual('worker')
   })
 })

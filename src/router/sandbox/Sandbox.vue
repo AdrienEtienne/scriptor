@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>
-      {{title}} <small class="text-muted">{{description}}</small>
+      <router-link to="/sandbox">{{title}}</router-link> <small class="text-muted">{{description}}</small>
     </h1>
     <hr />
   </div>

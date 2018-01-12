@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Needs <b-badge pill variant="light">{{needs.length}}</b-badge></h4>
+    <h4>Needs <b-badge pill variant="dark">{{needs.length}}</b-badge></h4>
     <needs :needs="needs"/>
   </div>
 </template>

@@ -9,7 +9,7 @@
       {{data.item.description}}
     </template>
     <template slot="needs" slot-scope="data">
-      <b-badge variant="success" pill>{{(data.item.needs || []).length}}</b-badge>
+      <b-badge variant="dark" pill>{{(data.item.needs || []).length}}</b-badge>
     </template>
   </b-table>
 </template>

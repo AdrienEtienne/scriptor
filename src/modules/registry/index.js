@@ -1,10 +1,5 @@
-import {
-  registry as validateSchema
-} from '../validators/validateSchema'
-import {
-  registry as validateFunctional
-} from '../validators/validateFunctional'
-import RegistryError from './RegistryError'
+import validators from '../validators'
+import ScriptorError from '../ScriptorError'
 import {
   construct
 } from './tools'
@@ -39,10 +34,10 @@ class Registry {
    */
   set (arr) {
     let result
-    result = validateSchema(arr)
-    if (result.status > 0) throw new RegistryError('Cannot validate model schema', result.errors)
-    result = validateFunctional(arr)
-    if (result.status > 0) throw new RegistryError('Cannot validate functional model', result.errors)
+    result = validators.schema.registry(arr)
+    if (result.status > 0) throw new ScriptorError('Cannot validate model schema', result.errors)
+    result = validators.functional.registry(arr)
+    if (result.status > 0) throw new ScriptorError('Cannot validate functional model', result.errors)
 
     const workers = construct(arr)
 

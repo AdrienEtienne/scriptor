@@ -1,10 +1,11 @@
-import {
+import validators from '@/modules/validators'
+import * as INSTRUCTION from '@/modules/instruction/TYPES'
+import Result from '@/modules/validators/Result'
+
+const {
   registry,
   instruction
-} from '@/modules/validators/validateSchema'
-import * as SCHEMA from '@/modules/validators/SCHEMA'
-import * as INSTRUCTION from '@/modules/instruction/TYPE'
-import Result from '@/modules/validators/Result'
+} = validators.schema
 
 describe('schema validator', () => {
   describe('registry', function () {
@@ -58,46 +59,48 @@ describe('schema validator', () => {
       delete arr[0].name
       const error = errors(arr)[0]
       expect(error.message).toEqual('requires property "name"')
-      expect(error.worker).toEqual(0)
-      expect(error.task).toEqual(-1)
-      expect(error.need).toEqual(-1)
-      expect(error.attribute).toEqual('name')
+      expect(error.argument).toEqual('name')
+      expect(error.property).toEqual('workers[0]')
     })
     it('return error for task', () => {
       delete arr[0].tasks[0].name
       const error = errors(arr)[0]
       expect(error.message).toEqual('requires property "name"')
-      expect(error.worker).toEqual(0)
-      expect(error.task).toEqual(0)
-      expect(error.need).toEqual(-1)
-      expect(error.attribute).toEqual('name')
+      expect(error.argument).toEqual('name')
+      expect(error.property).toEqual('workers[0].tasks[0]')
     })
     it('return error for need', () => {
       delete arr[0].tasks[0].needs[0].name
       const error = errors(arr)[0]
       expect(error.message).toEqual('requires property "name"')
-      expect(error.worker).toEqual(0)
-      expect(error.task).toEqual(0)
-      expect(error.need).toEqual(0)
-      expect(error.attribute).toEqual('name')
+      expect(error.argument).toEqual('name')
+      expect(error.property).toEqual('workers[0].tasks[0].needs[0]')
     })
   })
   describe('instruction', function () {
-    const errors = (schema, arg) => instruction(schema, arg).errors
+    const errors = (type, arg) => instruction(type, arg).errors
 
-    it('validation success', () => {
-      expect(instruction(SCHEMA.INSTRUCTION_INSTANCE_CREATE, {
-        name: 'name',
-        workerId: 'workerId'
-      }).status).toEqual(0)
-    })
+    describe(INSTRUCTION.INSTANCE_CREATE, function () {
+      it('validation success', () => {
+        expect(instruction(INSTRUCTION.INSTANCE_CREATE, {
+          instance: {
+            name: 'name',
+            workerId: 'workerId'
+          }
+        }).status).toEqual(0)
+      })
 
-    it('validate instruction ' + INSTRUCTION.INSTANCE_CREATE, () => {
-      const errs = errors(SCHEMA.INSTRUCTION_INSTANCE_CREATE, {})
-      expect(errs[0].message).toEqual('requires property "name"')
-      expect(errs[0].attribute).toEqual('name')
-      expect(errs[1].message).toEqual('requires property "workerId"')
-      expect(errs[1].attribute).toEqual('workerId')
+      it('validate instruction ' + INSTRUCTION.INSTANCE_CREATE, () => {
+        const errs = errors(INSTRUCTION.INSTANCE_CREATE, {
+          instance: {}
+        })
+        expect(errs[0].message).toEqual('requires property "name"')
+        expect(errs[0].argument).toEqual('name')
+        expect(errs[0].property).toEqual('instance')
+        expect(errs[1].message).toEqual('requires property "workerId"')
+        expect(errs[1].argument).toEqual('workerId')
+        expect(errs[1].property).toEqual('instance')
+      })
     })
   })
 })

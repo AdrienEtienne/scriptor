@@ -42,6 +42,14 @@ describe('Query', () => {
         expect(query.task.value).toEqual(registry.workers[0].tasks[0])
       })
     })
+    describe('need', function () {
+      it('return one element', () => {
+        expect(query.need.values).toHaveLength(1)
+      })
+      it('return the element', () => {
+        expect(query.need.value).toEqual(registry.workers[0].tasks[0].needs[0])
+      })
+    })
   })
 
   describe('id', function () {

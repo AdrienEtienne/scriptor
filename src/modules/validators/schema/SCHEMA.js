@@ -47,8 +47,8 @@ export const REGISTRY = {
   'required': ['workers']
 }
 
-export const INSTRUCTION_INSTANCE_CREATE = {
-  'id': '/Instruction',
+export const INSTANCE = {
+  'id': '/Instance',
   'type': 'object',
   'properties': {
     'name': {'type': 'string'},

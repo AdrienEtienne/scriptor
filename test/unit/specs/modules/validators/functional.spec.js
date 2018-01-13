@@ -1,7 +1,7 @@
-import {
-  registry
-} from '@/modules/validators/validateFunctional'
+import validators from '@/modules/validators'
 import Result from '@/modules/validators/Result'
+
+const registry = validators.functional.registry
 
 describe('functional validator', () => {
   describe('registry', function () {

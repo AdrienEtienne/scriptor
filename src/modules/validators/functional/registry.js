@@ -1,6 +1,6 @@
 import { map, countBy } from 'lodash'
-import ValidationError from './ValidationError'
-import Result from './Result'
+import ValidationError from '../ValidationError'
+import Result from '../Result'
 
 const isNameAlreadyUsed = (collection, name) => {
   const count = countBy(collection, (el) => el.name)
@@ -27,7 +27,7 @@ const workerIsNotDefined = (errors, workers, workerName, ...lstIndex) => {
   return errors
 }
 
-export function registry (arr) {
+export default function registry (arr) {
   const result = new Result()
   let errors = []
 

@@ -1,10 +1,8 @@
 class ValidationError extends Error {
-  constructor (message, {worker = -1, task = -1, need = -1, attribute} = {}) {
+  constructor (message, {argument, property = ''} = {}) {
     super(message)
-    this.worker = worker
-    this.task = task
-    this.need = need
-    this.attribute = attribute
+    this.argument = argument
+    this.property = property
   }
 }
 

@@ -1,1 +1,2 @@
 export const INSTANCE_CREATE = 'INSTANCE_CREATE'
+export const INSTANCE_CALL = 'INSTANCE_CALL'

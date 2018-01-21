@@ -1,5 +1,4 @@
-import Query from '@/modules/scriptor/Query'
-
+import Query from '@/modules/query/RegistryQuery'
 import genRegistry from '../registry/index.spec'
 
 let registry

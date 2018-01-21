@@ -1,7 +1,7 @@
 import Registry from '../registry'
-import Query from './Query'
 import createInstruction from '../instruction'
 import InstructionCreateInstance from '../instruction/InstructionCreateInstance'
+import Query from '../query/ScriptorQuery'
 
 class Scriptor {
   constructor (registry) {
@@ -23,6 +23,10 @@ class Scriptor {
     return this._instructions
   }
 
+  get query () {
+    return new Query(this)
+  }
+
   get instances () {
     let instances = []
 
@@ -36,8 +40,8 @@ class Scriptor {
     return instances
   }
 
-  get query () {
-    return new Query(this._registry)
+  get registry () {
+    return this._registry
   }
 
   goTo (position) {

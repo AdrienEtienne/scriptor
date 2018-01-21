@@ -2,7 +2,7 @@ import Scriptor from '@/modules/scriptor/Scriptor'
 import genRegistry from '../registry/index.spec'
 import {
   INSTANCE_CREATE,
-  INSTANCE_CALL
+  TASK_CALL
 } from '@/modules/instruction/TYPES'
 
 let registry
@@ -14,7 +14,7 @@ describe('Scriptor.create', () => {
     scriptor = new Scriptor(registry)
   })
   it('add instruction', () => {
-    const worker = scriptor.query.worker.value
+    const worker = registry.query.worker.value
     scriptor.create(INSTANCE_CREATE, {
       instance: {
         name: 'instance',
@@ -31,7 +31,7 @@ describe('Scriptor.create', () => {
 
   describe(INSTANCE_CREATE, function () {
     it('add instruction', () => {
-      const worker = scriptor.query.worker.value
+      const worker = registry.query.worker.value
       const instruction = scriptor.create(INSTANCE_CREATE, {
         instance: { name: 'name', workerId: worker.id }
       })
@@ -65,7 +65,7 @@ describe('Scriptor.create', () => {
       }
     })
     it('throw if instance name taken', () => {
-      const worker = scriptor.query.worker.value
+      const worker = registry.query.worker.value
       scriptor.create(INSTANCE_CREATE, {
         instance: { name: 'name 1', workerId: worker.id }
       })
@@ -86,12 +86,18 @@ describe('Scriptor.create', () => {
       }
     })
   })
-  describe(INSTANCE_CALL, function () {
+  describe(TASK_CALL, function () {
     beforeEach(() => {
-      const worker = scriptor.query.worker.value
+      const worker = registry.query.worker.value
       scriptor.create(INSTANCE_CREATE, {
         instance: { name: 'name', workerId: worker.id }
       })
+    })
+    it('add instruction', () => {
+      console.log(scriptor.instances)
+      // const instruction = scriptor.create(TASK_CALL, {
+      //   instance: instance.id
+      // })
     })
   })
 })

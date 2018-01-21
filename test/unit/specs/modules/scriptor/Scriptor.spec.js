@@ -36,7 +36,7 @@ describe('Scriptor', () => {
     })
 
     it('return only one instance', () => {
-      const worker = scriptor.query.worker.value
+      const worker = registry.query.worker.value
       scriptor.create(INSTANCE_CREATE, {
         instance: { name: 'name 1', workerId: worker.id }
       })

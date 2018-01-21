@@ -1,5 +1,6 @@
 import validators from '../validators'
 import ScriptorError from '../ScriptorError'
+import Query from '../query/RegistryQuery'
 import {
   construct
 } from './tools'
@@ -25,6 +26,10 @@ class Registry {
 
   get workers () {
     return this._workers
+  }
+
+  get query () {
+    return new Query(this)
   }
 
   /**

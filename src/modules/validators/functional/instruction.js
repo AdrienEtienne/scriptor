@@ -1,25 +1,15 @@
 import ValidationError from '../ValidationError'
 import Result from '../Result'
-import * as INSTRUCTION from '../../instruction/TYPES'
-
-function composer (scriptor) {
-  return (validators) => {
-    let errors = []
-
-    validators.forEach(validator => {
-      try {
-        validator(scriptor)
-      } catch (e) {
-        errors.push(e)
-      }
-    })
-
-    return errors
-  }
-}
+import {
+  INSTANCE_CREATE,
+  TASK_CALL
+} from '../../instruction/TYPES'
+import {
+ composer
+} from './tools'
 
 const workerExist = (workerId) => (scriptor) => {
-  const worker = scriptor.query.worker.id(workerId).value
+  const worker = scriptor.registry.query.worker.id(workerId).value
   if (!worker) {
     throw new ValidationError('Worker not found', {
       argument: 'workerId',
@@ -56,13 +46,12 @@ export default function instruction (scriptor) {
     const result = new Result()
     let errors = []
 
-    if (INSTRUCTION.INSTANCE_CREATE === type) {
-      errors = compose([
-        workerExist(obj.instance.workerId),
+    if (INSTANCE_CREATE === type) {
+      errors = compose(
+        [workerExist(obj.instance.workerId), false],
         instanceNameTaken(obj.instance.name)
-      ])
-    } else {
-
+      )
+    } else if (TASK_CALL === type) {
     }
 
     result.setErrors(errors)

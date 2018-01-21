@@ -10,8 +10,6 @@ class Query {
   constructor (registry) {
     this._registry = registry
 
-    this._result = []
-
     this._resultElementType = null
 
     this._worker = {}

@@ -5,7 +5,7 @@ export function composer (scriptor) {
     let errors = []
 
     forEach(validators, el => {
-      let goToNext = true
+      let goToNext = false
       let validator = el
       if (validator instanceof Array) {
         goToNext = validator[1]

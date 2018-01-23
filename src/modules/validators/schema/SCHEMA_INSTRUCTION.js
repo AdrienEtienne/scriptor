@@ -7,16 +7,16 @@ export const INSTANCE_CREATE = {
   'required': ['instance']
 }
 
-export const INSTANCE_CALL = {
+export const TASK_CALL = {
   'id': '/InstructionInstanceCall',
   'type': 'object',
   'properties': {
-    'instance': {'$ref': '/Instance'},
+    'instanceId': {'type': 'string'},
     'taskId': {'type': 'string'},
     'needs': {
       'type': 'array',
       'items': {'$ref': '/Instance'}
     }
   },
-  'required': ['instance', 'task']
+  'required': ['instanceId', 'taskId']
 }

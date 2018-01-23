@@ -12,14 +12,17 @@ describe('functional validator tools', () => {
           [() => { throw new Error() }, true],
           () => { throw new Error() }
         )).toHaveLength(2)
-        expect(compose(
-          () => { throw new Error() },
-          () => { throw new Error() }
-        )).toHaveLength(2)
       })
       it('return only one error if false', () => {
         expect(compose(
           [() => { throw new Error() }, false],
+          () => { throw new Error() }
+        )).toHaveLength(1)
+      })
+
+      it('return only one error by default', () => {
+        expect(compose(
+          () => { throw new Error() },
           () => { throw new Error() }
         )).toHaveLength(1)
       })

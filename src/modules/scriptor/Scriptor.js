@@ -1,6 +1,5 @@
 import Registry from '../registry'
 import createInstruction from '../instruction'
-import InstructionCreateInstance from '../instruction/InstructionCreateInstance'
 import Query from '../query/ScriptorQuery'
 
 class Scriptor {
@@ -12,7 +11,6 @@ class Scriptor {
       throw new Error('Argument shall be an instance of Registry')
     }
     this._registry = registry
-    this._createInstruction = createInstruction(this)
   }
 
   get position () {
@@ -27,21 +25,16 @@ class Scriptor {
     return new Query(this)
   }
 
-  get instances () {
-    let instances = []
-
-    this._instructions.forEach((instruction, index) => {
-      if (index === this.position) return false
-      if (instruction instanceof InstructionCreateInstance) {
-        instances.push(instruction.instance)
-      }
-    })
-
-    return instances
-  }
-
   get registry () {
     return this._registry
+  }
+
+  get add () {
+    return createInstruction(this)
+  }
+
+  get createTest () {
+    return createInstruction(this, false)
   }
 
   goTo (position) {
@@ -54,15 +47,6 @@ class Scriptor {
 
   goToTail () {
     this._position = this._instructions.length
-  }
-
-  create (type, obj) {
-    let instruction = this._createInstruction(type, obj)
-
-    this._instructions.splice(this.position, 0, instruction)
-    this.goTo(this.position + 1)
-
-    return instruction
   }
 }
 

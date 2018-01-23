@@ -1,8 +1,5 @@
 import Scriptor from '@/modules/scriptor/Scriptor'
 import genRegistry from '../registry/index.spec'
-import {
-  INSTANCE_CREATE
-} from '@/modules/instruction/TYPES'
 
 let registry
 let scriptor
@@ -27,25 +24,6 @@ describe('Scriptor', () => {
       scriptor._instructions.push('toto')
       expect(scriptor.goTo(1)).toBeTruthy()
       expect(scriptor.position).toEqual(1)
-    })
-  })
-
-  describe('instances', function () {
-    it('return zero elements', () => {
-      expect(scriptor.instances).toHaveLength(0)
-    })
-
-    it('return only one instance', () => {
-      const worker = registry.query.worker.value
-      scriptor.create(INSTANCE_CREATE, {
-        instance: { name: 'name 1', workerId: worker.id }
-      })
-      scriptor.create(INSTANCE_CREATE, {
-        instance: { name: 'name 2', workerId: worker.id }
-      })
-      expect(scriptor.instances).toHaveLength(2)
-      scriptor.goTo(1)
-      expect(scriptor.instances).toHaveLength(1)
     })
   })
 })

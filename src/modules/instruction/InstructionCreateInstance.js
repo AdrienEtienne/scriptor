@@ -2,6 +2,7 @@ import Instruction from './Instruction'
 
 /**
  * Instruction for instance creation
+ * @memberof instruction
  * @extends Instruction
  * @property {Instance} instance Instance
  */

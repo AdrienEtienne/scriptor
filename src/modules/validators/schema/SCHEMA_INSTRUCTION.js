@@ -15,7 +15,7 @@ export const TASK_CALL = {
     'taskId': {'type': 'string'},
     'needs': {
       'type': 'array',
-      'items': {'$ref': '/Instance'}
+      'items': {'type': 'string'}
     }
   },
   'required': ['instanceId', 'taskId']

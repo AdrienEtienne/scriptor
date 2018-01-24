@@ -1,5 +1,5 @@
 import validators from '@/modules/validators'
-import * as INSTRUCTION from '@/modules/instruction/TYPES'
+import INSTRUCTION from '@/modules/instruction/TYPE'
 import Result from '@/modules/validators/Result'
 
 const {

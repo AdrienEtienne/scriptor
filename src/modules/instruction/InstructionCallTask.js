@@ -2,12 +2,14 @@ import Instruction from './Instruction'
 
 /**
  * Instruction for task call
+ * @memberof instruction
  * @extends Instruction
  * @property {string} instanceId Instance Id
  * @property {string} taskId Task Id
+ * @property {string[]} needs Needs for task as array of instance id
  *
  */
-class CallTask extends Instruction {
+class InstructionCallTask extends Instruction {
   constructor (data) {
     super('call_task')
     this.instanceId = data.instanceId
@@ -16,4 +18,4 @@ class CallTask extends Instruction {
   }
 }
 
-export default CallTask
+export default InstructionCallTask

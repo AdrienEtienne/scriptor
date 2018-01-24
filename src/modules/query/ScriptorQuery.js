@@ -1,7 +1,13 @@
-import {isMatch} from 'lodash'
+import { forEach, isMatch } from 'lodash'
 import InstructionCreateInstance from '../instruction/InstructionCreateInstance'
 import RegistryQuery from './RegistryQuery'
 
+/**
+ * Query to find scriptor elements
+ * @memberof query
+ * @extends query.RegistryQuery
+ * @property {this} instance Set Instance as current element
+ */
 class ScriptorQuery extends RegistryQuery {
   constructor (scriptor) {
     super(scriptor._registry)
@@ -20,16 +26,15 @@ class ScriptorQuery extends RegistryQuery {
       let scriptor = this._scriptor
       let instances = []
 
-      scriptor.instructions
-        .forEach((instruction, index) => {
-          if (index === scriptor.position) return false
-          if (instruction instanceof InstructionCreateInstance) {
-            let instance = instruction.instance
-            if (isMatch(instance, this._instance)) {
-              instances.push(instruction.instance)
-            }
+      forEach(scriptor.instructions, (instruction, index) => {
+        if (index === scriptor.position) return false
+        if (instruction instanceof InstructionCreateInstance) {
+          let instance = instruction.instance
+          if (isMatch(instance, this._instance)) {
+            instances.push(instruction.instance)
           }
-        })
+        }
+      })
 
       return instances
     } else {

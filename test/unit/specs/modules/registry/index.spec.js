@@ -10,6 +10,11 @@ export default function gen (data) {
         worker: 'worker'
       }]
     }]
+  }, {
+    name: 'worker 2',
+    tasks: [{
+      name: 'task 1'
+    }]
   }])
 }
 

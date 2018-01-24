@@ -1,9 +1,6 @@
 import Scriptor from '@/modules/scriptor/Scriptor'
 import genRegistry from '../registry/index.spec'
-import {
-  INSTANCE_CREATE,
-  TASK_CALL
-} from '@/modules/instruction/TYPES'
+import INSTRUCTION from '@/modules/instruction/TYPE'
 
 let registry
 let scriptor
@@ -20,7 +17,7 @@ describe('Scriptor.create', () => {
     expect(scriptor.position).toEqual(1)
   })
 
-  describe(INSTANCE_CREATE, function () {
+  describe(INSTRUCTION.INSTANCE_CREATE, function () {
     it('add instruction', () => {
       const worker = registry.query.worker.value
       const instruction = scriptor.add.createInstance('name', worker.id)
@@ -62,10 +59,24 @@ describe('Scriptor.create', () => {
       }
     })
   })
-  describe(TASK_CALL, function () {
+  describe(INSTRUCTION.TASK_CALL, function () {
+    let instance
     beforeEach(() => {
       const worker = registry.query.worker.value
-      scriptor.add.createInstance('name', worker.id)
+      instance = scriptor.add.createInstance('instance 1', worker.id).instance
+    })
+
+    it('add instruction', () => {
+      const instanceId = scriptor.query.instance.value.id
+      const taskId = registry.query.task.value.id
+      const instruction = scriptor.add.callTask(
+        instanceId,
+        taskId,
+        [instanceId]
+      )
+      expect(instruction.instanceId).toEqual(instanceId)
+      expect(instruction.taskId).toEqual(taskId)
+      expect(instruction.needs).toEqual([instanceId])
     })
     it('throw if instance does not exist', () => {
       try {
@@ -80,27 +91,55 @@ describe('Scriptor.create', () => {
         expect.hasAssertions()
       }
     })
-    it('throw if task not exist', () => {
+    it('throw if task not exist for a worker', () => {
       try {
         scriptor.add.callTask(
-          scriptor.query.instance.value.id,
-          'task id'
+          instance.id,
+          scriptor.query.task.values[1].id
         )
       } catch (e) {
         expect(e.errors).toHaveLength(1)
         expect(e.errors[0].argument).toEqual('id')
         expect(e.errors[0].property).toEqual('task')
-        expect(e.errors[0].value).toEqual('task id')
+        expect(e.errors[0].value).toEqual(scriptor.query.task.values[1].id)
         expect(e.errors[0].message).toEqual('Task does not exist')
       } finally {
         expect.hasAssertions()
       }
     })
-    it.skip('add instruction', () => {
-      scriptor.add.callTask(
-        scriptor.query.instance.value.id,
-        registry.query.task.value.id
-      )
+    it('throw if needs missing', () => {
+      try {
+        scriptor.add.callTask(
+          instance.id,
+          scriptor.query.task.values[0].id
+        )
+      } catch (e) {
+        expect(e.errors).toHaveLength(1)
+        expect(e.errors[0].argument).toEqual('need')
+        expect(e.errors[0].property).toEqual('needs[0]')
+        expect(e.errors[0].message).toEqual('Task\'s need is missing')
+      } finally {
+        expect.hasAssertions()
+      }
+    })
+    it('throw if need is in a bad type', () => {
+      const worker = registry.query.worker.values[1]
+      const instance2 = scriptor.add.createInstance('instance 2', worker.id).instance
+      try {
+        scriptor.add.callTask(
+          instance.id,
+          scriptor.query.task.values[0].id,
+          [instance2.id]
+        )
+      } catch (e) {
+        expect(e.errors).toHaveLength(1)
+        expect(e.errors[0].argument).toEqual('need')
+        expect(e.errors[0].property).toEqual('needs[0]')
+        expect(e.errors[0].value).toEqual(instance2.id)
+        expect(e.errors[0].message).toEqual('Task\'s need bad type')
+      } finally {
+        expect.hasAssertions()
+      }
     })
   })
 })

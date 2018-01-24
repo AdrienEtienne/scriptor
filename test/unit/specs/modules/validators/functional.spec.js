@@ -2,6 +2,7 @@ import validators from '@/modules/validators'
 import Result from '@/modules/validators/Result'
 
 const registry = validators.functional.registry
+const instruction = validators.functional.instruction
 
 describe('functional validator', () => {
   describe('registry', function () {
@@ -74,6 +75,12 @@ describe('functional validator', () => {
           expect(errors[0].message).toEqual('Worker "not exist" is not defined')
         })
       })
+    })
+  })
+
+  describe('instruction', function () {
+    it('throw if type not defined', () => {
+      expect(() => instruction()('undefined')).toThrow('Instruction type "undefined" undefined')
     })
   })
 })

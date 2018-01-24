@@ -2,7 +2,8 @@ import Element from './Element'
 
 /**
  * An element Need
- * @extends Element
+ * @memberof model
+ * @extends model.Element
  * @property {string} workerId Worker Id
  */
 class Need extends Element {

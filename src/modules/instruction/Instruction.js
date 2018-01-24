@@ -2,6 +2,7 @@ import { uniqueId } from 'lodash'
 
 /**
  * Instruction
+ * @memberof instruction
  * @property {string} id Id
  */
 class Instruction {

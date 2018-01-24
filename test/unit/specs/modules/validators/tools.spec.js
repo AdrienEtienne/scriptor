@@ -6,17 +6,20 @@ describe('functional validator tools', () => {
   describe('composer', function () {
     let compose = composer()
 
-    describe('goToNext', function () {
-      it('return two errors if not array or true', () => {
-        expect(compose(
-          [() => { throw new Error() }, true],
+    describe('next', function () {
+      it('return two errors next at true', () => {
+        expect(compose({
+          validator: () => { throw new Error() },
+          next: true
+        },
           () => { throw new Error() }
         )).toHaveLength(2)
       })
       it('return only one error if false', () => {
-        expect(compose(
-          [() => { throw new Error() }, false],
-          () => { throw new Error() }
+        expect(compose({
+          validator: () => { throw new Error() },
+          next: false
+        }, () => { throw new Error() }
         )).toHaveLength(1)
       })
 

@@ -6,7 +6,21 @@ import {
   map
 } from 'lodash'
 
-class Query {
+/**
+ * Query for element research
+ * @namespace query
+ */
+
+/**
+ * Query to find registry elements
+ * @memberof query
+ * @property {this} worker Set worker as active element
+ * @property {this} task Set task as active element
+ * @property {this} need Set need as active element
+ * @property {model.Element} value Element found
+ * @property {model.Element[]} values Elements found
+ */
+class RegistryQuery {
   constructor (registry) {
     this._registry = registry
 
@@ -72,6 +86,12 @@ class Query {
     return this
   }
 
+  /**
+   * id - Set an id as filter for the current element
+   *
+   * @param  {string} id Id of the element
+   * @return {this}    This
+   */
   id (id) {
     if (this._resultElementType) {
       const type = '_' + this._resultElementType
@@ -81,4 +101,4 @@ class Query {
   }
 }
 
-export default Query
+export default RegistryQuery

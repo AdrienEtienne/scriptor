@@ -1,22 +1,24 @@
-import { forEach } from 'lodash'
+import { forEach, isFunction, noop } from 'lodash'
 
 export function composer (scriptor) {
   return (...validators) => {
     let errors = []
 
     forEach(validators, el => {
-      let goToNext = false
-      let validator = el
-      if (validator instanceof Array) {
-        goToNext = validator[1]
-        validator = validator[0]
-      }
+      let validate
+      let next = false
+      let callback = noop
+      if (!isFunction(el)) {
+        validate = el.validator
+        if (el.next !== undefined) next = el.next
+        if (el.callback) callback = el.callback
+      } else validate = el
 
       try {
-        validator(scriptor)
+        validate(scriptor, callback)
       } catch (e) {
         errors.push(e)
-        if (!goToNext) return false
+        if (!next) return false
       }
     })
 

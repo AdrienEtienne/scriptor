@@ -1,2 +1,0 @@
-export const INSTANCE_CREATE = 'INSTANCE_CREATE'
-export const TASK_CALL = 'TASK_CALL'

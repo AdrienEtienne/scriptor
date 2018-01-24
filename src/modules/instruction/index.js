@@ -1,6 +1,6 @@
 import ScriptorError from '../ScriptorError'
 import validators from '../validators'
-import * as INSTRUCTION from './TYPES'
+import INSTRUCTION from './TYPE'
 import Instance from '../models/Instance'
 import InstructionCreateInstance from './InstructionCreateInstance'
 import InstructionCallTask from './InstructionCallTask'
@@ -28,18 +28,17 @@ function createInstruction (scriptor, add = true) {
 
     let instruction
     if (type === INSTRUCTION.INSTANCE_CREATE) {
-      const instance = new Instance({
-        name: obj.instance.name,
-        workerId: obj.instance.workerId
-      })
       instruction = new InstructionCreateInstance({
-        instance
+        instance: new Instance({
+          name: obj.instance.name,
+          workerId: obj.instance.workerId
+        })
       })
     } else if (type === INSTRUCTION.TASK_CALL) {
       instruction = new InstructionCallTask({
         instanceId: obj.instanceId,
         taskId: obj.taskId,
-        needs: []
+        needs: obj.needs
       })
     }
 

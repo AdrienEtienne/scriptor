@@ -15,9 +15,7 @@ const parseError = (error) => {
     throw new Error(error.stack)
   }
 
-  if (property.startsWith('instance.')) {
-    property = property.replace('instance.', '')
-  }
+  property = property.replace(/^instance\./, '')
 
   return new ValidationError(message, {
     argument,

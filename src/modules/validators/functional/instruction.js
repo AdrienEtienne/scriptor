@@ -1,9 +1,6 @@
 import ValidationError from '../ValidationError'
 import Result from '../Result'
-import {
-  INSTANCE_CREATE,
-  TASK_CALL
-} from '../../instruction/TYPES'
+import INSTRUCTION from '../../instruction/TYPE'
 import {
  composer
 } from './tools'
@@ -41,7 +38,7 @@ const instanceNameTaken = (name) => (scriptor) => {
   }
 }
 
-const instanceExist = (instanceId) => (scriptor) => {
+const instanceExist = (instanceId) => (scriptor, callback) => {
   const instance = scriptor.query.instance.id(instanceId).value
   if (!instance) {
     throw new ValidationError('Instance does not exist', {
@@ -49,18 +46,43 @@ const instanceExist = (instanceId) => (scriptor) => {
       property: 'instance',
       value: instanceId
     })
-  } else return instance
+  }
+  callback(instance)
 }
 
-const taskExist = (taskId) => (scriptor) => {
-  const task = scriptor.query.task.id(taskId).value
+const taskExistForWorker = (workerId, taskId) => (scriptor, callback) => {
+  const task = scriptor.query
+    .worker.id(workerId)
+    .task.id(taskId).value
   if (!task) {
     throw new ValidationError('Task does not exist', {
       argument: 'id',
       property: 'task',
       value: taskId
     })
-  } else return task
+  }
+  callback(task)
+}
+
+const needsFulfilled = (task, needs = []) => scriptor => {
+  task.needs.forEach((need, index) => {
+    const instanceId = needs[index]
+
+    if (!instanceId) {
+      throw new ValidationError('Task\'s need is missing', {
+        argument: 'need',
+        property: 'needs[' + index + ']'
+      })
+    }
+    const instance = scriptor.query.instance.id(instanceId).value
+    if (instance.workerId !== need.workerId) {
+      throw new ValidationError('Task\'s need bad type', {
+        argument: 'need',
+        property: 'needs[' + index + ']',
+        value: instanceId
+      })
+    }
+  })
 }
 
 export default function instruction (scriptor) {
@@ -70,16 +92,23 @@ export default function instruction (scriptor) {
     const result = new Result()
     let errors = []
 
-    if (INSTANCE_CREATE === type) {
+    if (INSTRUCTION.INSTANCE_CREATE === type) {
       errors = compose(
         workerExist(obj.instance.workerId),
         instanceNameTaken(obj.instance.name)
       )
-    } else if (TASK_CALL === type) {
-      errors = compose(
-        instanceExist(obj.instanceId),
-        taskExist(obj.taskId)
-      )
+    } else if (INSTRUCTION.TASK_CALL === type) {
+      let instance
+      let task
+      errors = compose({
+        validator: instanceExist(obj.instanceId),
+        callback: (obj) => { instance = obj }
+      }, {
+        validator: (...args) => taskExistForWorker(instance.workerId, obj.taskId)(...args),
+        callback: (obj) => { task = obj }
+      }, (...args) => needsFulfilled(task, obj.needs)(...args))
+    } else {
+      throw Error('Instruction type "' + type + '" undefined')
     }
 
     result.setErrors(errors)

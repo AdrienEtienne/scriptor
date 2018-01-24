@@ -23,7 +23,7 @@ describe('Query', () => {
   describe('element', function () {
     describe('worker', function () {
       it('return one element', () => {
-        expect(query.worker.values).toHaveLength(1)
+        expect(query.worker.values.length).toBeGreaterThan(0)
       })
       it('return the element', () => {
         expect(query.worker.value).toEqual(registry.workers[0])
@@ -35,7 +35,7 @@ describe('Query', () => {
     })
     describe('task', function () {
       it('return one element', () => {
-        expect(query.task.values).toHaveLength(1)
+        expect(query.task.values.length).toBeGreaterThan(0)
       })
       it('return the element', () => {
         expect(query.task.value).toEqual(registry.workers[0].tasks[0])
@@ -43,7 +43,7 @@ describe('Query', () => {
     })
     describe('need', function () {
       it('return one element', () => {
-        expect(query.need.values).toHaveLength(1)
+        expect(query.need.values.length).toBeGreaterThan(0)
       })
       it('return the element', () => {
         expect(query.need.value).toEqual(registry.workers[0].tasks[0].needs[0])

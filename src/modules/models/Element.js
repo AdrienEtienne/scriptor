@@ -4,6 +4,7 @@ import {
 
 /**
  * Scriptor Element
+ * @memberof model
  * @property {string} id Id
  * @property {string} name Name
  */

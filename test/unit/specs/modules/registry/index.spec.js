@@ -1,5 +1,23 @@
 import Registry from '@/modules/registry'
 
+export default function gen (data) {
+  return new Registry(data || [{
+    name: 'worker',
+    tasks: [{
+      name: 'task',
+      needs: [{
+        name: 'need',
+        worker: 'worker'
+      }]
+    }]
+  }, {
+    name: 'worker 2',
+    tasks: [{
+      name: 'task 1'
+    }]
+  }])
+}
+
 describe('Registry', () => {
   let arr = null
   let registry = null
@@ -16,7 +34,7 @@ describe('Registry', () => {
         }]
       }]
     }]
-    registry = new Registry(arr)
+    registry = gen(arr)
   })
 
   beforeEach(() => {

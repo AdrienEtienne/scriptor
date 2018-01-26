@@ -1,11 +1,3 @@
-var text = require('../../../../src/text')
-const {
-  WORKER_1,
-  TASK_2,
-  NEED_1,
-  NEED_1_DESC
-} = text
-
 module.exports = {
   before: function (browser) {
     var registry = browser.page.registry()
@@ -18,12 +10,12 @@ module.exports = {
     var worker = browser.page.worker()
     worker
       .expect.element('@title')
-      .text.to.equals(`${WORKER_1} can ${TASK_2} with ${NEED_1}`)
+      .text.to.equals('IT Guy can Code something really great with A developper')
   },
   'needs line is well displayed': function (browser) {
     var worker = browser.page.worker()
     worker.expect.element(worker.getLine(1))
-      .text.to.equals(`${NEED_1} ${NEED_1_DESC} ${WORKER_1}`)
+      .text.to.equals('A developper An help because the task cant be done alone IT Guy')
   },
   after: function (browser) {
     browser

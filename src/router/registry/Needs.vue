@@ -14,20 +14,7 @@ export default {
     Needs
   },
   computed: {
-    ...mapGetters(['getNeeds', 'getWorkerByName']),
-    needs () {
-      const needs = []
-      const tmp = this.getNeeds(
-        this.$route.params.worker,
-        this.$route.params.task)
-      for (var i = 0; i < tmp.length; i++) {
-        needs.push({
-          ...tmp[i],
-          worker: this.getWorkerByName(tmp[i].worker)
-        })
-      }
-      return needs
-    }
+    ...mapGetters(['needs'])
   }
 }
 </script>

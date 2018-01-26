@@ -14,6 +14,8 @@ export default function gen (data) {
     name: 'worker 2',
     tasks: [{
       name: 'task 1'
+    }, {
+      name: 'task 2'
     }]
   }])
 }

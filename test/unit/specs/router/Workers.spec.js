@@ -5,31 +5,31 @@ import Component from '@/router/registry/Workers'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('Workers.vue', () => {
-  let store
-  let workersMock
-  let getters
+let store
+let getters
+let actions
 
+const wrap = () => mount(Component, {
+  store,
+  localVue
+})
+
+describe('Workers.vue', () => {
   beforeEach(() => {
-    workersMock = jest.fn()
-    workersMock.mockReturnValue([{
-      name: 'worker',
-      description: 'description',
-      tasks: []
-    }])
     getters = {
-      workers: workersMock
+      workers: jest.fn().mockReturnValue([])
+    }
+    actions = {
+      query: jest.fn()
     }
     store = new Vuex.Store({
-      getters
+      getters,
+      actions
     })
   })
 
   it('should render workers count', () => {
-    const wrapper = mount(Component, {
-      store,
-      localVue
-    })
-    expect(wrapper.find('h3 > span.badge').text()).toEqual('1')
+    const wrapper = wrap()
+    expect(wrapper.find('h3 > span.badge').text()).toEqual('0')
   })
 })

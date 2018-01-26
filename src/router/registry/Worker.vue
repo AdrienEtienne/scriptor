@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Entity from '@/components/Entity'
 
 export default {
@@ -17,10 +17,15 @@ export default {
     Entity
   },
   computed: {
-    ...mapGetters(['getWorkerByName']),
-    worker () {
-      return this.getWorkerByName(this.$route.params.worker)
-    }
+    ...mapGetters(['worker'])
+  },
+  methods: {
+    ...mapActions(['query'])
+  },
+  created () {
+    this.query({
+      workerName: this.$route.params.worker
+    })
   }
 }
 </script>

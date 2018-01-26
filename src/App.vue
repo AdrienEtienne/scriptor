@@ -21,13 +21,46 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import FooterApp from '@/components/FooterApp'
 import text from '@/text'
 export default {
   name: 'app',
+  computed: mapGetters([
+    'registryWorkers',
+    'workers',
+    'instances'
+  ]),
+  methods: mapActions([
+    'instanciateScriptor',
+    'createInstance',
+    'callTask'
+  ]),
   components: {
     FooterApp
   },
+
+  created () {
+    this.instanciateScriptor(this.registryWorkers)
+    this.createInstance({
+      name: 'Adrien',
+      workerId: this.workers[0].id
+    })
+    this.createInstance({
+      name: 'John',
+      workerId: this.workers[1].id
+    })
+    this.createInstance({
+      name: 'John',
+      workerId: this.workers[1].id
+    })
+    this.callTask({
+      instanceId: this.instances[0].id,
+      taskId: this.workers[0].tasks[0].id
+    })
+  },
+
   data () {
     return {
       registryText: text.REGISTRY,

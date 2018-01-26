@@ -5,51 +5,28 @@ import Component from '@/router/registry/Tasks'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('Tasks.vue', () => {
-  let store
-  let getTasksMock
-  let $route
-  let getters
+let store
+let getters
 
+const wrap = () => {
+  return mount(Component, {
+    store,
+    localVue
+  })
+}
+
+describe('Tasks.vue', () => {
   beforeEach(() => {
-    getTasksMock = jest.fn()
-    getTasksMock.mockReturnValue([{
-      name: 'task',
-      description: 'description',
-      needs: []
-    }])
     getters = {
-      getTasks: () => getTasksMock
-    }
-    $route = {
-      params: {
-        worker: 'worker'
-      }
+      tasks: jest.fn().mockReturnValue([])
     }
     store = new Vuex.Store({
       getters
     })
   })
 
-  it('should render needs count', () => {
-    const wrapper = mount(Component, {
-      store,
-      localVue,
-      mocks: { $route }
-    })
-    expect(wrapper.find('h4 .badge').text()).toEqual('1')
-  })
-
-  it('should render needs count if no needs', () => {
-    getTasksMock.mockReturnValue([{
-      name: 'task',
-      description: 'description'
-    }])
-    const wrapper = mount(Component, {
-      store,
-      localVue,
-      mocks: { $route }
-    })
-    expect(wrapper.find('h4 .badge').text()).toEqual('1')
+  it('should render task count', () => {
+    const wrapper = wrap()
+    expect(wrapper.find('h4 .badge').text()).toEqual('0')
   })
 })

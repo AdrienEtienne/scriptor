@@ -17,7 +17,7 @@ describe('Scriptor.create', () => {
     expect(scriptor.position).toEqual(1)
   })
 
-  describe(INSTRUCTION.INSTANCE_CREATE, function () {
+  describe(INSTRUCTION.CREATE_INSTANCE, function () {
     it('add instruction', () => {
       const worker = registry.query.worker.value
       const instruction = scriptor.add.createInstance('name', worker.id)
@@ -59,7 +59,7 @@ describe('Scriptor.create', () => {
       }
     })
   })
-  describe(INSTRUCTION.TASK_CALL, function () {
+  describe(INSTRUCTION.CALL_TASK, function () {
     let instance
     beforeEach(() => {
       const worker = registry.query.worker.value

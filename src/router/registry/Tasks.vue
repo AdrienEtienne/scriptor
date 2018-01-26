@@ -14,10 +14,7 @@ export default {
     Tasks
   },
   computed: {
-    ...mapGetters(['getTasks']),
-    tasks () {
-      return this.getTasks(this.$route.params.worker)
-    }
+    ...mapGetters(['tasks'])
   }
 }
 </script>

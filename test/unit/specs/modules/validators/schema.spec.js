@@ -80,9 +80,9 @@ describe('schema validator', () => {
   describe('instruction', function () {
     const errors = (type, arg) => instruction(type, arg).errors
 
-    describe(INSTRUCTION.INSTANCE_CREATE, function () {
+    describe(INSTRUCTION.CREATE_INSTANCE, function () {
       it('validation success', () => {
-        expect(instruction(INSTRUCTION.INSTANCE_CREATE, {
+        expect(instruction(INSTRUCTION.CREATE_INSTANCE, {
           instance: {
             name: 'name',
             workerId: 'workerId'
@@ -90,8 +90,8 @@ describe('schema validator', () => {
         }).status).toEqual(0)
       })
 
-      it('validate instruction ' + INSTRUCTION.INSTANCE_CREATE, () => {
-        const errs = errors(INSTRUCTION.INSTANCE_CREATE, {
+      it('validate instruction ' + INSTRUCTION.CREATE_INSTANCE, () => {
+        const errs = errors(INSTRUCTION.CREATE_INSTANCE, {
           instance: {}
         })
         expect(errs[0].message).toEqual('requires property "name"')

@@ -27,14 +27,14 @@ function createInstruction (scriptor, add = true) {
     validate(type, obj)
 
     let instruction
-    if (type === INSTRUCTION.INSTANCE_CREATE) {
+    if (type === INSTRUCTION.CREATE_INSTANCE) {
       instruction = new InstructionCreateInstance({
         instance: new Instance({
           name: obj.instance.name,
           workerId: obj.instance.workerId
         })
       })
-    } else if (type === INSTRUCTION.TASK_CALL) {
+    } else if (type === INSTRUCTION.CALL_TASK) {
       instruction = new InstructionCallTask({
         instanceId: obj.instanceId,
         taskId: obj.taskId,
@@ -55,14 +55,14 @@ export default function (scriptor, add) {
   const create = createInstruction(scriptor, add)
   return {
     createInstance: (name, workerId) =>
-      create(INSTRUCTION.INSTANCE_CREATE, {
+      create(INSTRUCTION.CREATE_INSTANCE, {
         instance: {
           name,
           workerId
         }
       }),
     callTask: (instanceId, taskId, needs) =>
-      create(INSTRUCTION.TASK_CALL, {
+      create(INSTRUCTION.CALL_TASK, {
         instanceId,
         taskId,
         needs

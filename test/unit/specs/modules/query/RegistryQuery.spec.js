@@ -42,11 +42,11 @@ describe('Query', () => {
       })
     })
     describe('need', function () {
-      it('return one element', () => {
+      it('return at least one element', () => {
         expect(query.need.values.length).toBeGreaterThan(0)
       })
-      it('return the element', () => {
-        expect(query.need.value).toEqual(registry.workers[0].tasks[0].needs[0])
+      it('return one element', () => {
+        expect(query.need.value.id).toContain('need')
       })
     })
   })
@@ -61,6 +61,22 @@ describe('Query', () => {
         .id(registry.workers[0].id)
       expect(el._worker.id)
         .toEqual(registry.workers[0].id)
+    })
+  })
+
+  describe('name', function () {
+    it('do nothing if no type setted', () => {
+      query.name()
+    })
+    it('set name', () => {
+      query.worker.name('toto')
+      expect(query._worker.name).toEqual('toto')
+    })
+    it('unset name', () => {
+      query.worker
+        .name('toto')
+        .name()
+      expect(query._worker.name).toBeUndefined()
     })
   })
 })

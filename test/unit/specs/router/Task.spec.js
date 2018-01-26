@@ -5,32 +5,27 @@ import Component from '@/router/registry/Task'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('Task.vue', () => {
-  let store
-  let getTaskByNameMock
-  let getWorkerByNameMock
-  let $route
-  let getters
+let store
+let $route
+let getters
+let actions
 
+const wrap = () => {
+  return mount(Component, {
+    store,
+    localVue,
+    mocks: { $route }
+  })
+}
+
+describe('Task.vue', () => {
   beforeEach(() => {
-    getTaskByNameMock = jest.fn()
-    getWorkerByNameMock = jest.fn()
-    getTaskByNameMock.mockReturnValue({
-      name: 'task',
-      description: 'description',
-      needs: [{
-        name: 'need',
-        description: 'description',
-        worker: 'worker'
-      }]
-    })
-    getWorkerByNameMock.mockReturnValue({
-      name: 'worker',
-      description: 'description'
-    })
     getters = {
-      getTaskByName: () => getTaskByNameMock,
-      getWorkerByName: () => getWorkerByNameMock
+      task: () => ({name: 'task', needs: [{name: 'need'}]}),
+      worker: () => ({name: 'worker'})
+    }
+    actions = {
+      query: jest.fn()
     }
     $route = {
       params: {
@@ -39,16 +34,13 @@ describe('Task.vue', () => {
       }
     }
     store = new Vuex.Store({
-      getters
+      getters,
+      actions
     })
   })
 
   it('should render needs count', () => {
-    const wrapper = mount(Component, {
-      store,
-      localVue,
-      mocks: { $route }
-    })
+    const wrapper = wrap()
     const text = wrapper.find('h3').text()
     expect(text).toContain('worker')
     expect(text).toContain('can')

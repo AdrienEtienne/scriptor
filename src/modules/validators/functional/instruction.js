@@ -92,12 +92,12 @@ export default function instruction (scriptor) {
     const result = new Result()
     let errors = []
 
-    if (INSTRUCTION.INSTANCE_CREATE === type) {
+    if (INSTRUCTION.CREATE_INSTANCE === type) {
       errors = compose(
         workerExist(obj.instance.workerId),
         instanceNameTaken(obj.instance.name)
       )
-    } else if (INSTRUCTION.TASK_CALL === type) {
+    } else if (INSTRUCTION.CALL_TASK === type) {
       let instance
       let task
       errors = compose({

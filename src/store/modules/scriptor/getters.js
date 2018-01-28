@@ -24,5 +24,20 @@ export default {
   },
   instances (state) {
     return state.query.instances
+  },
+  getErrorMessage (state) {
+    const errors = state.error ? state.error.errors : []
+    return (property) => {
+      const error = errors.find((error) => error.property === property)
+      if (!error) return null
+      else return error.message
+    }
+  },
+  getValidationState (state, getters) {
+    return (submitted, property) => {
+      if (!submitted) return null
+      const message = getters.getErrorMessage(property)
+      return !message
+    }
   }
 }

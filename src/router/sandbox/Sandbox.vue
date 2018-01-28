@@ -4,23 +4,40 @@
       <router-link to="/sandbox">{{title}}</router-link> <small class="text-muted">{{description}}</small>
     </h1>
     <hr />
-    <b-list-group>
-      <b-list-group-item v-for="(item, key) in instructions" :key="key">{{item.type}}</b-list-group-item>
-    </b-list-group>
+    <modal-call-task/>
+    <modal-create-instance/>
+    <b-button-toolbar>
+      <b-button-group>
+        <b-dropdown size="sm" id="ddown-add-instruction" text="Add Instruction" variant="outline-primary">
+          <b-dropdown-item v-b-modal="'modal-call-task'">Call Task</b-dropdown-item>
+          <b-dropdown-item v-b-modal="'modal-create-instance'">Create an Instance</b-dropdown-item>
+        </b-dropdown>
+      </b-button-group>
+    </b-button-toolbar>
+    <instructions />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 import text from '@/text.js'
+import Instructions from '@/router/sandbox/Instructions'
+import ModalCallTask from '@/router/sandbox/instructions/ModalCallTask'
+import ModalCreateInstance from '@/router/sandbox/instructions/ModalCreateInstance'
 
 export default {
   name: 'Sandbox',
-
-  computed: mapGetters([
-    'instructions'
-  ]),
-
+  components: {
+    Instructions,
+    ModalCallTask,
+    ModalCreateInstance
+  },
+  methods: {
+    ...mapActions(['query'])
+  },
+  created () {
+    this.query()
+  },
   data () {
     return {
       title: text.SANDBOX,
@@ -29,3 +46,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .btn-toolbar {
+    margin-bottom: 0.5rem;
+  }
+</style>

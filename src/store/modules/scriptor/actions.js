@@ -24,6 +24,7 @@ export default {
       dispatch('setElements')
     } catch (e) {
       commit(types.INSTANTIATE_SCRIPTOR_FAILURE, e)
+      throw e
     }
   },
   createInstance ({commit, dispatch}, {name, workerId}) {
@@ -45,19 +46,29 @@ export default {
       dispatch('setElements')
     } catch (e) {
       commit(types.ADD_INSTRUCTION_FAILURE, e)
+      throw e
     }
   },
-  callTask ({commit, dispatch}, {instanceId, taskId}) {
+  callTask ({commit, dispatch}, {instanceId, taskId, needs}) {
     commit(types.ADD_INSTRUCTION_REQUEST)
     try {
-      const instruction = scriptor.add.callTask(instanceId, taskId)
+      const instruction = scriptor.add.callTask(instanceId, taskId, needs)
+      const instance = scriptor.query.instance.id(instanceId).value
+      const task = scriptor.query.task.id(taskId).value
       commit(types.ADD_INSTRUCTION_SUCCESS, {
-        instruction,
+        instruction: {
+          ...instruction,
+          instance,
+          task,
+          needs: instruction.needs.map(need =>
+            scriptor.query.instance.id(need).value)
+        },
         position: scriptor.position
       })
       dispatch('setElements')
     } catch (e) {
       commit(types.ADD_INSTRUCTION_FAILURE, e)
+      throw e
     }
   },
   query ({commit}, request = {}) {

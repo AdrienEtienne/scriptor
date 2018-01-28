@@ -38,11 +38,16 @@ describe('store scriptor', () => {
   })
   describe('instanciateScriptor', function () {
     it('cannot create', () => {
-      actions.instanciateScriptor({commit}, [])
-      expect(commitMock)
-        .toHaveBeenCalledTimes(2)
-      expect(commitMock.mock.calls[1][0])
-        .toEqual(types.INSTANTIATE_SCRIPTOR_FAILURE)
+      try {
+        actions.instanciateScriptor({commit}, [])
+      } catch (error) {
+        expect(commitMock)
+          .toHaveBeenCalledTimes(2)
+        expect(commitMock.mock.calls[1][0])
+          .toEqual(types.INSTANTIATE_SCRIPTOR_FAILURE)
+      } finally {
+        expect.hasAssertions()
+      }
     })
     it('create a scriptor', () => {
       actions.instanciateScriptor({
@@ -60,11 +65,16 @@ describe('store scriptor', () => {
       commitMock = jest.fn()
     })
     it('cannot add instruction', () => {
-      actions.createInstance({commit, dispatch}, {})
-      expect(commitMock)
-        .toHaveBeenCalledTimes(2)
-      expect(commitMock.mock.calls[1][0])
-        .toEqual(types.ADD_INSTRUCTION_FAILURE)
+      try {
+        actions.createInstance({commit, dispatch}, {})
+      } catch (error) {
+        expect(commitMock)
+          .toHaveBeenCalledTimes(2)
+        expect(commitMock.mock.calls[1][0])
+          .toEqual(types.ADD_INSTRUCTION_FAILURE)
+      } finally {
+        expect.hasAssertions()
+      }
     })
     it('add instruction', () => {
       actions.createInstance({commit, dispatch}, {
@@ -87,11 +97,16 @@ describe('store scriptor', () => {
       commitMock = jest.fn()
     })
     it('cannot add instruction', () => {
-      actions.callTask({commit, dispatch}, {})
-      expect(commitMock)
-        .toHaveBeenCalledTimes(2)
-      expect(commitMock.mock.calls[1][0])
-        .toEqual(types.ADD_INSTRUCTION_FAILURE)
+      try {
+        actions.callTask({commit, dispatch}, {})
+      } catch (error) {
+        expect(commitMock)
+          .toHaveBeenCalledTimes(2)
+        expect(commitMock.mock.calls[1][0])
+          .toEqual(types.ADD_INSTRUCTION_FAILURE)
+      } finally {
+        expect.hasAssertions()
+      }
     })
     it('add instruction', () => {
       actions.callTask({commit, dispatch}, {

@@ -15,7 +15,7 @@ class InstructionCallTask extends Instruction {
     super('call_task', TYPE.CALL_TASK)
     this.instanceId = data.instanceId
     this.taskId = data.taskId
-    this.needs = data.needs
+    this.needs = data.needs || []
   }
 }
 

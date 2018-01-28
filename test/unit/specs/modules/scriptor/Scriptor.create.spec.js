@@ -32,7 +32,6 @@ describe('Scriptor.create', () => {
       } catch (e) {
         expect(e.message).toEqual('Cannot validate instruction information')
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('id')
         expect(e.errors[0].property).toEqual('worker')
         expect(e.errors[0].value).toEqual('fake worker')
         expect(e.errors[0].message).toEqual('Worker does not exist')
@@ -50,10 +49,35 @@ describe('Scriptor.create', () => {
       } catch (e) {
         expect(e.message).toEqual('Cannot validate instruction information')
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('name')
-        expect(e.errors[0].property).toEqual('instance')
+        expect(e.errors[0].property).toEqual('instance.name')
         expect(e.errors[0].value).toEqual('name 2')
         expect(e.errors[0].message).toEqual('Instance name "name 2" taken')
+      } finally {
+        expect.hasAssertions()
+      }
+    })
+    it('throw if name empty', () => {
+      const worker = registry.query.worker.value
+      try {
+        scriptor.add.createInstance('', worker.id)
+      } catch (e) {
+        expect(e.message).toEqual('Cannot validate instruction schema')
+        expect(e.errors).toHaveLength(1)
+        expect(e.errors[0].property).toEqual('instance.name')
+        expect(e.errors[0].message).toEqual('does not meet minimum length of 1')
+      } finally {
+        expect.hasAssertions()
+      }
+    })
+    it('throw if name not defined', () => {
+      const worker = registry.query.worker.value
+      try {
+        scriptor.add.createInstance(null, worker.id)
+      } catch (e) {
+        expect(e.message).toEqual('Cannot validate instruction schema')
+        expect(e.errors).toHaveLength(1)
+        expect(e.errors[0].property).toEqual('instance.name')
+        expect(e.errors[0].message).toEqual('is not of a type(s) string')
       } finally {
         expect.hasAssertions()
       }
@@ -83,7 +107,6 @@ describe('Scriptor.create', () => {
         scriptor.add.callTask('instanceId', 'taskId')
       } catch (e) {
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('id')
         expect(e.errors[0].property).toEqual('instance')
         expect(e.errors[0].value).toEqual('instanceId')
         expect(e.errors[0].message).toEqual('Instance does not exist')
@@ -99,7 +122,6 @@ describe('Scriptor.create', () => {
         )
       } catch (e) {
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('id')
         expect(e.errors[0].property).toEqual('task')
         expect(e.errors[0].value).toEqual(scriptor.query.task.values[1].id)
         expect(e.errors[0].message).toEqual('Task does not exist')
@@ -115,7 +137,6 @@ describe('Scriptor.create', () => {
         )
       } catch (e) {
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('need')
         expect(e.errors[0].property).toEqual('needs[0]')
         expect(e.errors[0].message).toEqual('Task\'s need is missing')
       } finally {
@@ -133,7 +154,6 @@ describe('Scriptor.create', () => {
         )
       } catch (e) {
         expect(e.errors).toHaveLength(1)
-        expect(e.errors[0].argument).toEqual('need')
         expect(e.errors[0].property).toEqual('needs[0]')
         expect(e.errors[0].value).toEqual(instance2.id)
         expect(e.errors[0].message).toEqual('Task\'s need bad type')

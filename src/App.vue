@@ -42,23 +42,37 @@ export default {
   },
 
   created () {
-    this.instanciateScriptor(this.registryWorkers)
-    this.createInstance({
-      name: 'Adrien',
-      workerId: this.workers[0].id
-    })
-    this.createInstance({
-      name: 'John',
-      workerId: this.workers[1].id
-    })
-    this.createInstance({
-      name: 'John',
-      workerId: this.workers[1].id
-    })
-    this.callTask({
-      instanceId: this.instances[0].id,
-      taskId: this.workers[0].tasks[0].id
-    })
+    try {
+      this.instanciateScriptor(this.registryWorkers)
+      this.createInstance({
+        name: 'Adrien',
+        workerId: this.workers[0].id
+      })
+      this.callTask({
+        instanceId: this.instances[0].id,
+        taskId: this.workers[0].tasks[0].id
+      })
+      this.createInstance({
+        name: 'John',
+        workerId: this.workers[0].id
+      })
+      this.callTask({
+        instanceId: this.instances[0].id,
+        taskId: this.workers[0].tasks[1].id,
+        needs: [this.instances[1].id]
+      })
+      this.createInstance({
+        name: 'Bill',
+        workerId: this.workers[1].id
+      })
+      this.callTask({
+        instanceId: this.instances[2].id,
+        taskId: this.workers[1].tasks[0].id,
+        needs: [this.instances[0].id, this.instances[1].id]
+      })
+    } catch (e) {
+      // error
+    }
   },
 
   data () {

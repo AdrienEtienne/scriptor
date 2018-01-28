@@ -51,7 +51,10 @@ export const INSTANCE = {
   'id': '/Instance',
   'type': 'object',
   'properties': {
-    'name': {'type': 'string'},
+    'name': {
+      'type': 'string',
+      'minLength': 1
+    },
     'workerId': {'type': 'string'}
   },
   'required': ['name', 'workerId']

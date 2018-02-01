@@ -4,7 +4,6 @@
 
 <script>
 export default {
-  name: 'Entity',
   props: {
     name: {
       type: String,
@@ -31,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.badge {
-  margin: 0 5px 0 0;
+.badge + .badge {
+  margin-left: 5px;
 }
 </style>

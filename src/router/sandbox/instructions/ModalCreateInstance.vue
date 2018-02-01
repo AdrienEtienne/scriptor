@@ -6,10 +6,10 @@
     @hidden="onReset"
   >
     <b-form @submit="onSubmit" @reset="onReset" novalidate>
-      <b-form-group id="createInstanceNameGroup"
+      <b-form-group id="instance-name-group"
         label="Name"
-        label-for="createInstanceName">
-        <b-form-input id="createInstanceName"
+        label-for="input-instance-name">
+        <b-form-input id="input-instance-name"
           type="text"
           v-model="form.name"
           placeholder="An instance name"
@@ -19,14 +19,14 @@
           {{getErrorMessage('instance.name')}}
         </b-form-invalid-feedback>
       </b-form-group>
-      <b-form-group id="selectWorkerGroup"
+      <b-form-group id="select-worker-group"
         label="Worker"
-        label-for="selectWorkerInput">
-        <b-form-select id="selectWorkerInput"
+        label-for="input-select-worker">
+        <b-form-select id="input-select-worker"
           v-model="form.workerId"
           :state="getValidationState(submitted, 'worker')">
-          <option value="">Select a worker</option>
-          <option v-for="(worker, key) in workers" :value="worker.id" :key="key">
+          <option value="" label="">Select a worker</option>
+          <option v-for="(worker, key) in workers" :value="worker.id" :key="key" :label="worker.name">
             {{worker.name}}
           </option>
         </b-form-select>
@@ -43,7 +43,11 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['workers', 'getValidationState', 'getErrorMessage'])
+    ...mapGetters([
+      'workers',
+      'getValidationState',
+      'getErrorMessage'
+    ])
   },
   methods: {
     ...mapActions(['createInstance']),
@@ -59,7 +63,6 @@ export default {
     },
     onReset (evt) {
       this.submitted = false
-      /* Reset our form values */
       this.form.name = ''
       this.form.workerId = ''
       if (evt) evt.preventDefault()

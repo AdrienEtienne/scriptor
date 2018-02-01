@@ -1,5 +1,5 @@
 import FooterApp from '@/components/FooterApp'
-import { mount } from 'vue-test-utils'
+import { mount } from '@vue/test-utils'
 
 describe('FooterApp.vue', () => {
   it('should render footer Vue', () => {

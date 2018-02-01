@@ -57,4 +57,58 @@ describe('scriptor getters', () => {
       expect(getters.instances(state)).toEqual([])
     })
   })
+  describe('getInstancesByWorkerId(workerId)', function () {
+    it('return one instance', () => {
+      expect(getters.getInstancesByWorkerId({
+        instances: [{workerId: 'id'}]
+      })('id')).toEqual([{workerId: 'id'}])
+    })
+    it('return empty array', () => {
+      expect(getters.getInstancesByWorkerId({
+        instances: [{workerId: 'id'}]
+      })('id2')).toHaveLength(0)
+    })
+  })
+  describe('getErrorMessage(state)(property)', function () {
+    it('return error message', () => {
+      expect(getters.getErrorMessage({
+        error: { message: 'error' }
+      })()).toEqual('error')
+    })
+    it('return null if no message match', () => {
+      expect(getters.getErrorMessage({
+        error: null
+      })()).toBeNull()
+      expect(getters.getErrorMessage({
+        error: { errors: [] }
+      })('property')).toBeNull()
+    })
+    it('return error message for property', () => {
+      expect(getters.getErrorMessage({
+        error: {
+          errors: [{property: 'property', message: 'error'}]
+        }
+      })('property')).toEqual('error')
+    })
+  })
+  describe('getValidationState(submitted, property)', () => {
+    it('return null', () => {
+      expect(getters.getValidationState(null, jest.fn())(false))
+        .toBeNull()
+    })
+    it('return false if message', () => {
+      const state = getters.getValidationState(null, {
+        getErrorMessage: jest.fn().mockReturnValue('message')
+      })(true)
+      expect(state)
+        .not.toBeTruthy()
+    })
+    it('return true if no message', () => {
+      const state = getters.getValidationState(null, {
+        getErrorMessage: jest.fn().mockReturnValue(null)
+      })(true)
+      expect(state)
+        .toBeTruthy()
+    })
+  })
 })

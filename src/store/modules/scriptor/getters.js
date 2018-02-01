@@ -1,3 +1,4 @@
+import { get } from 'lodash'
 // getters
 
 export default {
@@ -25,12 +26,19 @@ export default {
   instances (state) {
     return state.query.instances
   },
+  getInstancesByWorkerId (state) {
+    return (workerId) => state.instances.filter(instance => instance.workerId === workerId)
+  },
   getErrorMessage (state) {
-    const errors = state.error ? state.error.errors : []
     return (property) => {
+      if (!property) {
+        const message = get(state.error, 'message', null)
+        return message
+      }
+      const errors = get(state.error, 'errors', [])
       const error = errors.find((error) => error.property === property)
       if (!error) return null
-      else return error.message
+      return error.message
     }
   },
   getValidationState (state, getters) {

@@ -23,9 +23,8 @@ export default {
     ...mapActions(['query'])
   },
   created () {
-    this.query({
-      workerName: this.$route.params.worker
-    })
+    const workerName = this.$route.params.worker
+    this.query({ workerName })
   }
 }
 </script>

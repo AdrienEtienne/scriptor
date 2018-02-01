@@ -111,7 +111,8 @@ describe('store scriptor', () => {
     it('add instruction', () => {
       actions.callTask({commit, dispatch}, {
         instanceId: state.instances[0].id,
-        taskId: state.tasks[0].id
+        taskId: state.tasks[1].id,
+        needs: [state.instances[0].id]
       })
       expect(state.instructions).toHaveLength(2)
       expect(state.position).toEqual(2)

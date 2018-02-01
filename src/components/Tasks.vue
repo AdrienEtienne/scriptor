@@ -17,7 +17,6 @@
 <script>
 import Entity from '@/components/Entity'
 export default {
-  name: 'Tasks',
   components: {
     Entity
   },
@@ -38,3 +37,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

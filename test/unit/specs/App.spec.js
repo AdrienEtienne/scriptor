@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from 'vue-test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Component from '@/App.vue'
 
@@ -20,9 +20,12 @@ describe('App.vue', () => {
       registryWorkers: jest.fn().mockReturnValue([]),
       workers: jest.fn().mockReturnValue([{
         id: 'id',
-        tasks: [{id: 'id'}]
+        tasks: [{id: 'id'}, {id: 'id'}]
       }, {id: 'id2'}]),
-      instances: jest.fn().mockReturnValue([{id: 'id'}])
+      instances: jest.fn().mockReturnValue([
+        {id: 'id'},
+        {id: 'id2'}
+      ])
     }
     actions = {
       instanciateScriptor: jest.fn(),

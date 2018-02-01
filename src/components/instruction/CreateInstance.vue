@@ -1,6 +1,9 @@
 <template>
   <div>
-    Declare <entity :name="instance.name" type="instance"/> as a new <entity :name="worker.name" :description="worker.description" type="worker"/>
+    <span>Declare</span>
+    <entity :name="instance.name" type="instance"/>
+    <span>as a new</span>
+    <entity :name="worker.name" :description="worker.description" type="worker"/>
   </div>
 </template>
 
@@ -20,7 +23,7 @@ export default {
   },
   computed: {
     worker () {
-      return this.instance.worker || {}
+      return this.instance.worker
     }
   }
 }

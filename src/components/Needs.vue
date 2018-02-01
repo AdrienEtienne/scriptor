@@ -13,7 +13,6 @@
 <script>
 import Entity from '@/components/Entity'
 export default {
-  name: 'Needs',
   components: {
     Entity
   },
@@ -34,3 +33,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

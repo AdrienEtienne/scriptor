@@ -93,14 +93,23 @@ describe('Scriptor.create', () => {
     it('add instruction', () => {
       const instanceId = scriptor.query.instance.value.id
       const taskId = registry.query.task.value.id
-      const instruction = scriptor.add.callTask(
-        instanceId,
-        taskId,
-        [instanceId]
-      )
+      const instruction = scriptor.add
+        .callTask(instanceId, taskId, [instanceId])
       expect(instruction.instanceId).toEqual(instanceId)
       expect(instruction.taskId).toEqual(taskId)
       expect(instruction.needs).toEqual([instanceId])
+    })
+    it('add instruction without needs', () => {
+      const worker = registry.query.worker.values[1]
+      instance = scriptor.add.createInstance('instance 2', worker.id).instance
+      const taskId = registry.query
+            .worker.id(instance.workerId)
+            .task.value.id
+      const instruction = scriptor.add
+            .callTask(instance.id, taskId)
+      expect(instruction.instanceId).toEqual(instance.id)
+      expect(instruction.taskId).toEqual(taskId)
+      expect(instruction.needs).toHaveLength(0)
     })
     it('throw if instance does not exist', () => {
       try {

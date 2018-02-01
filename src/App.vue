@@ -48,22 +48,18 @@ export default {
         name: 'Adrien',
         workerId: this.workers[0].id
       })
-      this.callTask({
-        instanceId: this.instances[0].id,
-        taskId: this.workers[0].tasks[0].id
-      })
       this.createInstance({
         name: 'John',
         workerId: this.workers[0].id
+      })
+      this.createInstance({
+        name: 'Bill',
+        workerId: this.workers[1].id
       })
       this.callTask({
         instanceId: this.instances[0].id,
         taskId: this.workers[0].tasks[1].id,
         needs: [this.instances[1].id]
-      })
-      this.createInstance({
-        name: 'Bill',
-        workerId: this.workers[1].id
       })
       this.callTask({
         instanceId: this.instances[2].id,
@@ -71,7 +67,7 @@ export default {
         needs: [this.instances[0].id, this.instances[1].id]
       })
     } catch (e) {
-      // error
+      // Error
     }
   },
 
@@ -85,9 +81,4 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 </style>

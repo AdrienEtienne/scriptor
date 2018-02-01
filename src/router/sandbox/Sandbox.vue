@@ -1,16 +1,18 @@
 <template>
-  <div>
+  <div id="sandbox">
     <h1>
       <router-link to="/sandbox">{{title}}</router-link> <small class="text-muted">{{description}}</small>
     </h1>
     <hr />
-    <modal-call-task/>
-    <modal-create-instance/>
+    <div id="modals">
+      <modal-call-task/>
+      <modal-create-instance/>
+    </div>
     <b-button-toolbar>
       <b-button-group>
         <b-dropdown size="sm" id="ddown-add-instruction" text="Add Instruction" variant="outline-primary">
-          <b-dropdown-item v-b-modal="'modal-call-task'">Call Task</b-dropdown-item>
-          <b-dropdown-item v-b-modal="'modal-create-instance'">Create an Instance</b-dropdown-item>
+          <b-dropdown-item id="bt-modal-call-task" v-b-modal="'modal-call-task'">Call Task</b-dropdown-item>
+          <b-dropdown-item id="bt-modal-create-instance" v-b-modal="'modal-create-instance'">Create an Instance</b-dropdown-item>
         </b-dropdown>
       </b-button-group>
     </b-button-toolbar>
@@ -26,7 +28,6 @@ import ModalCallTask from '@/router/sandbox/instructions/ModalCallTask'
 import ModalCreateInstance from '@/router/sandbox/instructions/ModalCreateInstance'
 
 export default {
-  name: 'Sandbox',
   components: {
     Instructions,
     ModalCallTask,

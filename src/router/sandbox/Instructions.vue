@@ -1,7 +1,7 @@
 <template>
-  <b-list-group>
+  <b-list-group id="instructions">
     <b-list-group-item v-for="(item, key) in instructions" :key="key">
-      <call-task 
+      <call-task
         v-if="item.type === 'CALL_TASK'"
         :instance="item.instance"
         :task="item.task"

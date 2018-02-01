@@ -1,8 +1,10 @@
 <template>
   <div>
-    <entity :name="instance.name" type="instance"/> does <entity :name="task.name" :description="task.description" type="task"/>
+    <entity :name="instance.name" type="instance"/>
+    <span>does</span>
+    <entity :name="task.name" :description="task.description" type="task"/>
     <span v-if="needs.length>0">
-      with
+      <span>with</span>
       <entity
         v-for="(need, key) in needs" :key="key"
         :name="need.name"

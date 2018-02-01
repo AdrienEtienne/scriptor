@@ -1,4 +1,4 @@
-import { mount } from 'vue-test-utils'
+import { mount } from '@vue/test-utils'
 import Component from '@/router/registry/Registry'
 
 describe('Registry.vue', () => {

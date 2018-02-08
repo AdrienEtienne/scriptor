@@ -1,5 +1,5 @@
 import Component from '@/components/Home'
-import { mount } from 'vue-test-utils'
+import { mount } from '@vue/test-utils'
 
 describe('Home.vue', () => {
   it('should render correct contents', () => {

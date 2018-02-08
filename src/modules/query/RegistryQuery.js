@@ -1,6 +1,6 @@
 import {
+  clone,
   filter,
-  forEach,
   isMatch,
   union,
   map
@@ -34,36 +34,30 @@ class RegistryQuery {
   get values () {
     if (!this._resultElementType) return []
 
-    let result = []
-    result = filter(this._registry.workers, worker => {
+    let results = map(this._registry.workers, (worker) => clone(worker))
+
+    results = filter(results, worker => {
       if (!isMatch(worker, this._worker)) return false
 
-      let result = true
+      worker.tasks = filter(worker.tasks, task => {
+        if (!isMatch(task, this._task)) return false
 
-      forEach(worker.tasks, task => {
-        if (!isMatch(task, this._task)) {
-          result = false
-          return false
-        }
-        forEach(task.needs, need => {
-          if (!isMatch(need, this._need)) {
-            result = false
-            return false
-          }
+        task.needs = filter(task.needs, need => {
+          if (!isMatch(need, this._need)) return false
+          return true
         })
+        return true
       })
-
-      return result
+      return true
     })
 
-    if (this._resultElementType === 'worker') return result
+    if (this._resultElementType === 'worker') return results
 
-    result = union(...map(result, 'tasks'))
-    if (this._resultElementType === 'task') return result
+    results = union(...map(results, 'tasks'))
+    if (this._resultElementType === 'task') return results
 
-    result = union(...map(result, 'needs'))
-
-    return result
+    results = union(...map(results, 'needs'))
+    return results
   }
 
   get value () {
@@ -96,6 +90,21 @@ class RegistryQuery {
     if (this._resultElementType) {
       const type = '_' + this._resultElementType
       this[type].id = id
+    }
+    return this
+  }
+
+  /**
+   * name - Set a name as a filter
+   *
+   * @param  {string} name Name of the element
+   * @return {this}    This
+   */
+  name (name) {
+    if (this._resultElementType) {
+      const type = '_' + this._resultElementType
+      if (name) this[type].name = name
+      else delete this[type].name
     }
     return this
   }

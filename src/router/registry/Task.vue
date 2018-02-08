@@ -20,7 +20,7 @@
         v-for="(need, key) in task.needs"
         type="need"
         :name="need.name"
-        :description="need.description"/> 
+        :description="need.description"/>
     </h3>
     <br />
     <router-view/>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Entity from '@/components/Entity'
 
 export default {
@@ -36,15 +36,19 @@ export default {
     Entity
   },
   computed: {
-    ...mapGetters(['getTaskByName', 'getWorkerByName']),
-    worker () {
-      return this.getWorkerByName(this.$route.params.worker)
-    },
-    task () {
-      return this.getTaskByName(
-        this.$route.params.worker,
-        this.$route.params.task)
-    }
+    ...mapGetters(['task', 'worker'])
+  },
+  methods: {
+    ...mapActions(['query'])
+  },
+  created () {
+    this.query({
+      workerName: this.$route.params.worker,
+      taskName: this.$route.params.task
+    })
   }
 }
 </script>
+
+<style scoped>
+</style>

@@ -1,4 +1,4 @@
-export const INSTANCE_CREATE = {
+export const CREATE_INSTANCE = {
   'id': '/InstructionInstanceCreate',
   'type': 'object',
   'properties': {
@@ -7,7 +7,7 @@ export const INSTANCE_CREATE = {
   'required': ['instance']
 }
 
-export const TASK_CALL = {
+export const CALL_TASK = {
   'id': '/InstructionInstanceCall',
   'type': 'object',
   'properties': {

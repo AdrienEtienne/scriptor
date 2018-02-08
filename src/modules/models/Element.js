@@ -7,6 +7,7 @@ import {
  * @memberof model
  * @property {string} id Id
  * @property {string} name Name
+ * @property {string} description Description
  */
 class Element {
   /**
@@ -16,10 +17,12 @@ class Element {
    * @param  {object} data   Element data
    * @param  {string} data.id Element id if exist
    * @param  {string} data.name Element name
+   * @param  {string} data.description Element description
    */
   constructor (prefix, data) {
     this.id = data.id || uniqueId(prefix + '_')
     this.name = data.name
+    this.description = data.description || ''
   }
 }
 

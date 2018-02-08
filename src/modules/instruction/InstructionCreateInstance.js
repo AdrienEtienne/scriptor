@@ -1,4 +1,5 @@
 import Instruction from './Instruction'
+import TYPE from './TYPE'
 
 /**
  * Instruction for instance creation
@@ -8,7 +9,7 @@ import Instruction from './Instruction'
  */
 class InstructionCreateInstance extends Instruction {
   constructor (data) {
-    super('create_instance')
+    super('create_instance', TYPE.CREATE_INSTANCE)
     this.instance = data.instance
   }
 }

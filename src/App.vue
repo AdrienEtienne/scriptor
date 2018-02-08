@@ -21,13 +21,56 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import FooterApp from '@/components/FooterApp'
 import text from '@/text'
 export default {
   name: 'app',
+  computed: mapGetters([
+    'registryWorkers',
+    'workers',
+    'instances'
+  ]),
+  methods: mapActions([
+    'instanciateScriptor',
+    'createInstance',
+    'callTask'
+  ]),
   components: {
     FooterApp
   },
+
+  created () {
+    try {
+      this.instanciateScriptor(this.registryWorkers)
+      this.createInstance({
+        name: 'Adrien',
+        workerId: this.workers[0].id
+      })
+      this.createInstance({
+        name: 'John',
+        workerId: this.workers[0].id
+      })
+      this.createInstance({
+        name: 'Bill',
+        workerId: this.workers[1].id
+      })
+      this.callTask({
+        instanceId: this.instances[0].id,
+        taskId: this.workers[0].tasks[1].id,
+        needs: [this.instances[1].id]
+      })
+      this.callTask({
+        instanceId: this.instances[2].id,
+        taskId: this.workers[1].tasks[0].id,
+        needs: [this.instances[0].id, this.instances[1].id]
+      })
+    } catch (e) {
+      // Error
+    }
+  },
+
   data () {
     return {
       registryText: text.REGISTRY,
@@ -38,9 +81,4 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 </style>

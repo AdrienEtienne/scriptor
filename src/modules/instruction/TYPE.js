@@ -8,12 +8,12 @@ const TYPE = {
   /**
    * Instance creation
    */
-  INSTANCE_CREATE: 'INSTANCE_CREATE',
+  CREATE_INSTANCE: 'CREATE_INSTANCE',
 
   /**
    * Task call
    */
-  TASK_CALL: 'TASK_CALL'
+  CALL_TASK: 'CALL_TASK'
 }
 
 export default TYPE

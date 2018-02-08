@@ -1,4 +1,4 @@
-import { mount } from 'vue-test-utils'
+import { mount } from '@vue/test-utils'
 
 import Component from '@/components/Entity'
 
@@ -42,6 +42,11 @@ describe('Entity.vue', () => {
       propsData.type = 'task'
       const wrapper = mount(Component, { propsData })
       expect(wrapper.find('.badge-primary').exists()).toBe(true)
+    })
+    it('return primary if task', () => {
+      propsData.type = 'instance'
+      const wrapper = mount(Component, { propsData })
+      expect(wrapper.find('.badge-secondary').exists()).toBe(true)
     })
   })
 })

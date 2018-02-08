@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Workers from '@/components/Workers'
 
 export default {
@@ -15,6 +15,15 @@ export default {
   },
   computed: {
     ...mapGetters(['workers'])
+  },
+  methods: {
+    ...mapActions(['query'])
+  },
+  created () {
+    this.query()
   }
 }
 </script>
+
+<style scoped>
+</style>

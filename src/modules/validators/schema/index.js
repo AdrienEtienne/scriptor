@@ -8,17 +8,15 @@ import * as SCHEMA_INSTRUCTION from './SCHEMA_INSTRUCTION'
 
 const parseError = (error) => {
   const message = error.message
-  let argument = error.argument
   let property = error.property
-
-  if (/is not of a type/.test(message)) {
-    throw new Error(error.stack)
-  }
 
   property = property.replace(/^instance\./, '')
 
+  if (error.name === 'required') {
+    property += '.' + error.argument
+  }
+
   return new ValidationError(message, {
-    argument,
     property
   })
 }

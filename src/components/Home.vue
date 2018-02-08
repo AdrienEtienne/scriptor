@@ -33,7 +33,6 @@
 import text from '@/text'
 import Entity from '@/components/Entity'
 export default {
-  name: 'Home',
   components: {
     Entity
   },
@@ -66,3 +65,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

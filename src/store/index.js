@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
-import worker from './modules/worker'
+import registry from './modules/registry'
+import scriptor from './modules/scriptor'
 
 Vue.use(Vuex)
 
@@ -10,7 +11,8 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    worker
+    registry,
+    scriptor
   },
-  strict: true
+  strict: false
 })

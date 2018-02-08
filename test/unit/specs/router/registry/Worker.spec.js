@@ -1,25 +1,22 @@
-import { mount, createLocalVue } from 'vue-test-utils'
+import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Component from '@/router/registry/Worker'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('Worker.vue', () => {
-  let store
-  let getWorkerByNameMock
-  let $route
-  let getters
+let store
+let $route
+let getters
+let actions
 
+describe('Worker.vue', () => {
   beforeEach(() => {
-    getWorkerByNameMock = jest.fn()
-    getWorkerByNameMock.mockReturnValue({
-      name: 'worker',
-      description: 'description',
-      needs: []
-    })
     getters = {
-      getWorkerByName: () => getWorkerByNameMock
+      worker: jest.fn().mockReturnValue({name: 'worker'})
+    }
+    actions = {
+      query: jest.fn()
     }
     $route = {
       params: {
@@ -27,7 +24,8 @@ describe('Worker.vue', () => {
       }
     }
     store = new Vuex.Store({
-      getters
+      getters,
+      actions
     })
   })
 

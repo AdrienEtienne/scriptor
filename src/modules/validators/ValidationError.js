@@ -1,7 +1,6 @@
 class ValidationError extends Error {
-  constructor (message, {argument, property = '', value = ''} = {}) {
+  constructor (message, {property, value = ''} = {}) {
     super(message)
-    this.argument = argument
     this.property = property
     this.value = value
   }

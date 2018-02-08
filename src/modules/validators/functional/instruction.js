@@ -9,7 +9,6 @@ const workerExist = (workerId) => (scriptor) => {
   const worker = scriptor.registry.query.worker.id(workerId).value
   if (!worker) {
     throw new ValidationError('Worker does not exist', {
-      argument: 'id',
       property: 'worker',
       value: workerId
     })
@@ -31,8 +30,7 @@ const instanceNameTaken = (name) => (scriptor) => {
 
   if (shallThrow) {
     throw new ValidationError('Instance name "' + name + '" taken', {
-      argument: 'name',
-      property: 'instance',
+      property: 'instance.name',
       value: name
     })
   }
@@ -42,7 +40,6 @@ const instanceExist = (instanceId) => (scriptor, callback) => {
   const instance = scriptor.query.instance.id(instanceId).value
   if (!instance) {
     throw new ValidationError('Instance does not exist', {
-      argument: 'id',
       property: 'instance',
       value: instanceId
     })
@@ -56,7 +53,6 @@ const taskExistForWorker = (workerId, taskId) => (scriptor, callback) => {
     .task.id(taskId).value
   if (!task) {
     throw new ValidationError('Task does not exist', {
-      argument: 'id',
       property: 'task',
       value: taskId
     })
@@ -70,14 +66,12 @@ const needsFulfilled = (task, needs = []) => scriptor => {
 
     if (!instanceId) {
       throw new ValidationError('Task\'s need is missing', {
-        argument: 'need',
         property: 'needs[' + index + ']'
       })
     }
     const instance = scriptor.query.instance.id(instanceId).value
     if (instance.workerId !== need.workerId) {
       throw new ValidationError('Task\'s need bad type', {
-        argument: 'need',
         property: 'needs[' + index + ']',
         value: instanceId
       })
@@ -92,12 +86,12 @@ export default function instruction (scriptor) {
     const result = new Result()
     let errors = []
 
-    if (INSTRUCTION.INSTANCE_CREATE === type) {
+    if (INSTRUCTION.CREATE_INSTANCE === type) {
       errors = compose(
         workerExist(obj.instance.workerId),
         instanceNameTaken(obj.instance.name)
       )
-    } else if (INSTRUCTION.TASK_CALL === type) {
+    } else if (INSTRUCTION.CALL_TASK === type) {
       let instance
       let task
       errors = compose({

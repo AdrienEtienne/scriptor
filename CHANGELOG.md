@@ -21,6 +21,7 @@ All notable changes to this project will be documented in this file.
 - Modify home vue
 - Add Sandbox page
 - Create module registry
+- Create Instruction editor in sandbox page
 
 ### Fixed
 

@@ -26,5 +26,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Sup warning element id used on Footer
+- Not Found page and redirection handler
 
 [Unreleased]: https://github.com/AdrienEtienne/scriptor/compare/6fcb87...HEAD

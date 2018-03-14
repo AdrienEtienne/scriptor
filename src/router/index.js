@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import registry from '@/router/registry'
 import sandbox from '@/router/sandbox'
+import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
 
@@ -14,6 +15,10 @@ export default new Router({
       component: Home
     },
     ...registry,
-    ...sandbox
+    ...sandbox, {
+      path: '*',
+      name: 'notFound',
+      component: NotFound
+    }
   ]
 })

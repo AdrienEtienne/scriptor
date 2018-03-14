@@ -7,8 +7,21 @@ localVue.use(Vuex)
 
 let store
 let $route
+let $router
 let getters
 let actions
+
+const wrap = () => {
+  store = new Vuex.Store({
+    getters,
+    actions
+  })
+  return mount(Component, {
+    store,
+    localVue,
+    mocks: { $route, $router }
+  })
+}
 
 describe('Worker.vue', () => {
   beforeEach(() => {
@@ -23,18 +36,19 @@ describe('Worker.vue', () => {
         worker: 'worker'
       }
     }
-    store = new Vuex.Store({
-      getters,
-      actions
-    })
+    $router = {
+      push: jest.fn()
+    }
   })
 
   it('should render worker', () => {
-    const wrapper = mount(Component, {
-      store,
-      localVue,
-      mocks: { $route }
-    })
+    const wrapper = wrap()
     expect(wrapper.find('h3').text()).toEqual('worker')
+  })
+
+  it('should redirect to "notFound"', () => {
+    getters.worker = () => (null)
+    wrap()
+    expect($router.push).toHaveBeenCalledWith('/notFound')
   })
 })

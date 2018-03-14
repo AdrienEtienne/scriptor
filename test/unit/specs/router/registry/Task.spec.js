@@ -7,14 +7,19 @@ localVue.use(Vuex)
 
 let store
 let $route
+let $router
 let getters
 let actions
 
 const wrap = () => {
+  store = new Vuex.Store({
+    getters,
+    actions
+  })
   return mount(Component, {
     store,
     localVue,
-    mocks: { $route }
+    mocks: { $route, $router }
   })
 }
 
@@ -33,10 +38,9 @@ describe('Task.vue', () => {
         task: 'task'
       }
     }
-    store = new Vuex.Store({
-      getters,
-      actions
-    })
+    $router = {
+      push: jest.fn()
+    }
   })
 
   it('should render needs count', () => {
@@ -47,5 +51,11 @@ describe('Task.vue', () => {
     expect(text).toContain('task')
     expect(text).toContain('with')
     expect(text).toContain('need')
+  })
+
+  it('should redirect to "notFound"', () => {
+    getters.task = () => (null)
+    wrap()
+    expect($router.push).toHaveBeenCalledWith('/notFound')
   })
 })

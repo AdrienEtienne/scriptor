@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div v-if="worker">
     <h3>
       <entity type="worker" :name="worker.name" :description="worker.description"/>
     </h3>
     <br />
-    <router-view />
+    <router-view/>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
   created () {
     const workerName = this.$route.params.worker
     this.query({ workerName })
+    if (!this.worker) this.$router.push('/notFound')
   }
 }
 </script>

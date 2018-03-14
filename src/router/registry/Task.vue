@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="task">
     <h3>
       <router-link :to="{ name: 'worker', params: { worker: worker.name }}">
         <entity
@@ -46,6 +46,7 @@ export default {
       workerName: this.$route.params.worker,
       taskName: this.$route.params.task
     })
+    if (!this.task) this.$router.push('/notFound')
   }
 }
 </script>

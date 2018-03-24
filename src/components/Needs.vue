@@ -5,7 +5,9 @@
     </template>
     <template slot="description" slot-scope="data">{{data.item.description}}</template>
     <template slot="worker" slot-scope="data">
-      <entity type="worker" :name="data.item.worker.name" :description="data.item.worker.description"/>
+      <router-link :to="{ name: 'worker', params: { worker: data.item.worker.name }}">
+        <entity type="worker" :name="data.item.worker.name" :description="data.item.worker.description"/>
+      </router-link>
     </template>
   </b-table>
 </template>

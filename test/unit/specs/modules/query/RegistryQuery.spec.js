@@ -48,6 +48,10 @@ describe('Query', () => {
       it('return one element', () => {
         expect(query.need.value.id).toContain('need')
       })
+      it('return no element', () => {
+        query._need.name = 'fake need'
+        expect(query.need.value).toBeNull()
+      })
     })
   })
 

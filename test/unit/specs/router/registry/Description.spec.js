@@ -1,13 +1,12 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Component from '@/router/registry/Workers'
+import Component from '@/router/registry/Description'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
 let store
 let getters
-let actions
 
 const wrap = () => mount(Component, {
   store,
@@ -17,20 +16,15 @@ const wrap = () => mount(Component, {
 describe('Workers.vue', () => {
   beforeEach(() => {
     getters = {
-      workers: jest.fn().mockReturnValue([]),
       registryWorkers: () => []
     }
-    actions = {
-      query: jest.fn()
-    }
     store = new Vuex.Store({
-      getters,
-      actions
+      getters
     })
   })
 
   it('should render workers count', () => {
     const wrapper = wrap()
-    expect(wrapper.find('h3 > span.badge').text()).toEqual('0')
+    expect(wrapper.find('p').text()).toEqual('The registry allow you to define what you will be able to do in the Sandbox. There is 3 important entities to understand.')
   })
 })

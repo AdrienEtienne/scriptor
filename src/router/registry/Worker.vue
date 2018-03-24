@@ -5,19 +5,26 @@
     </h3>
     <br />
     <router-view/>
+    <json-tree :data="registryWorker" rootObjectKey="worker" maxDepth="3"></json-tree>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Entity from '@/components/Entity'
+import JsonTree from '@/components/JsonTree'
 
 export default {
   components: {
-    Entity
+    Entity,
+    JsonTree
   },
   computed: {
-    ...mapGetters(['worker'])
+    ...mapGetters(['worker', 'registryWorkers']),
+    registryWorker: function () {
+      return this.registryWorkers
+        .find(el => el.name === this.worker.name)
+    }
   },
   methods: {
     ...mapActions(['query'])

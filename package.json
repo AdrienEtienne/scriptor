@@ -1,24 +1,25 @@
 {
   "name": "scriptor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A demo web app showing a scripting tools",
   "author": "Adrien Etienne <a.etienne92@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "start:release": "npm run build && node server.js",
+    "start": "node server.js",
     "unit": "jest --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "coveralls": "cat test/unit/coverage/lcov.info | coveralls ",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
-    "doc": "jsdoc README.md src -r"
+    "doc": "jsdoc README.md src -r",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "bootstrap": "^4.0.0",
     "bootstrap-vue": "^2.0.0-rc.1",
+    "express": "^4.16.2",
     "jsonschema": "^1.2.2",
     "vue": "^2.5.16",
     "vue-json-tree-view": "^2.1.3",
@@ -57,7 +58,6 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
@@ -88,8 +88,8 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": "^8.10.0",
+    "npm": "^5.6.0"
   },
   "browserslist": [
     "> 1%",

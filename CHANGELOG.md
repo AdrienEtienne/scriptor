@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.1] - 28/03/2018
+
 ### Improvement
 
 - npm scripts for production
@@ -35,5 +37,6 @@ All notable changes to this project will be documented in this file.
 - Sup warning element id used on Footer
 - Not Found page and redirection handler
 
-[Unreleased]: https://github.com/AdrienEtienne/scriptor/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/AdrienEtienne/scriptor/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/AdrienEtienne/scriptor/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/AdrienEtienne/scriptor/compare/6fcb87...v1.0.0

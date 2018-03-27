@@ -1,6 +1,6 @@
 {
   "name": "scriptor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A demo web app showing a scripting tools",
   "author": "Adrien Etienne <a.etienne92@gmail.com>",
   "private": true,

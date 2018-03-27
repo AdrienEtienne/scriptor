@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.org/AdrienEtienne/scriptor.svg?branch=develop)](https://travis-ci.org/AdrienEtienne/scriptor) [![Coverage Status](https://coveralls.io/repos/github/AdrienEtienne/scriptor/badge.svg?branch=develop)](https://coveralls.io/github/AdrienEtienne/scriptor?branch=develop)
+
 # scriptor
 
-> A demo web app showing scripting toolsweb app
+> A demo showing a scripting tool : scriptor
 
 ## Build Setup
 
@@ -10,6 +12,8 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+npm start
+npm run start:release # start with express server
 
 # build for production with minification
 npm run build

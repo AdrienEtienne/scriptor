@@ -5,6 +5,7 @@ var config = require('../../config')
 module.exports = {
   src_folders: ['test/e2e/specs'],
   output_folder: 'test/e2e/reports',
+  page_objects_path: 'test/e2e/pages',
   custom_assertions_path: ['test/e2e/custom-assertions'],
 
   selenium: {
@@ -19,11 +20,13 @@ module.exports = {
 
   test_settings: {
     default: {
+      launch_url: 'http://localhost:' + (process.env.PORT || config.dev.port) + '/#/',
       selenium_port: 4444,
       selenium_host: 'localhost',
       silent: true,
       globals: {
-        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port),
+        waitForConditionTimeout: 2000
       }
     },
 

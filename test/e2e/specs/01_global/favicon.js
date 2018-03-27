@@ -2,18 +2,22 @@
 // http://nightwatchjs.org/guide#usage
 
 module.exports = {
-  'default e2e tests': function (browser) {
+  'favicon is present': function (browser) {
     // automatically uses dev Server port from /config.index.js
     // default: http://localhost:8080
     // see nightwatch.conf.js
     const devServer = browser.globals.devServerURL
+    var index = browser.page.index()
 
     browser
       .url(devServer)
-      .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.hello')
-      .assert.containsText('h1', 'Welcome to Your Vue.js App')
-      .assert.elementCount('img', 1)
+
+    index
+      .expect.element('@favicon')
+      .to.have.attribute('href')
+      .equals(browser.globals.devServerURL + '/static/favicon.ico')
+
+    browser
       .end()
   }
 }

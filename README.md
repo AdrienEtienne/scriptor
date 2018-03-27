@@ -2,7 +2,9 @@
 
 # scriptor
 
-> A demo showing a scripting tool : scriptor
+> A <a href="https://scriptor-demo.herokuapp.com">demo</a> showing a scripting javascript library : scriptor
+
+
 
 ## Build Setup
 

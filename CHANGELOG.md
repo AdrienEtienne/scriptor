@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Improvement
+
+- npm scripts for production
+
 ## [1.0.0] - 27/03/2018
 
 ### Improvement

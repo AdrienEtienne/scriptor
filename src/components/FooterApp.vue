@@ -1,22 +1,26 @@
 <template>
   <footer class="bg-light">
-    <div class="part text-light bg-dark">
-      This project has a
-      <img src="../assets/github.png" />
-      <a variant="link" href="https://github.com/AdrienEtienne/scriptor" target="_blank">Github</a>
-    </div>
-    <div class="part">
-      Developped with
-      <img src="../assets/vue.png" />
-      <a variant="link" href="https://vuejs.org/" target="_blank">Vue.js</a>
-    </div>
-    <div class="part text-light bootstrap">
-      Stylized with :
-      <img src="../assets/bootstrap.png" />
-      <a variant="link" href="http://getbootstrap.com/" target="_blank">Bootstrap V4</a> +
-      <img src="../assets/bootstrap-vue.png" />
-      <a variant="link" href="https://bootstrap-vue.js.org/" target="_blank">Bootstrap Vue</a>
-    </div>
+    <b-container>
+      <b-row>
+        <b-col md="6" class="links" offset-md="2">
+            <a variant="link" href="https://github.com/AdrienEtienne/scriptor" target="_blank">
+              <img src="../assets/github.png" /> Github
+            </a>
+            <a variant="link" href="https://vuejs.org/" target="_blank">
+              <img src="../assets/vue.png" /> Vue
+            </a>
+            <a variant="link" href="http://getbootstrap.com/" target="_blank">
+              <img src="../assets/bootstrap.png" /> Bootstrap V4
+            </a>
+            <a variant="link" href="https://bootstrap-vue.js.org/" target="_blank">
+              <img src="../assets/bootstrap-vue.png" /> Bootstrap Vue
+            </a>
+        </b-col>
+        <b-col md="4">
+            Powered by <a variant="link" href="http://www.heroku.com/" target="_blank"><img src="../assets/heroku.png" /></a>
+        </b-col>
+      </b-row>
+    </b-container>
   </footer>
 </template>
 
@@ -28,16 +32,14 @@ export default {}
 <style scoped>
 footer {
   margin-top: 40px;
+  padding: 20px 0;
+  font-size: 12px;
 }
-footer > .part {
-  padding: 10px 0;
-  text-align: center;
-}
-.bootstrap {
-  background-color: #563d7c;
+.links a {
+  display: block;
+  margin-bottom: 5px;
 }
 img {
-  width: 50px;
-  height: 50px;
+  height: 25px;
 }
 </style>

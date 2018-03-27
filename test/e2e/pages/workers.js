@@ -2,7 +2,7 @@ var tableCmds = require('../commands/table')
 
 module.exports = {
   url: function () {
-    return this.api.launchUrl + 'registry'
+    return this.api.launchUrl + 'registry/workers'
   },
   elements: {
     title: 'h3',

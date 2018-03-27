@@ -1,4 +1,5 @@
 import Registry from '@/router/registry/Registry'
+import Description from '@/router/registry/Description'
 import Workers from '@/router/registry/Workers'
 import Worker from '@/router/registry/Worker'
 import Tasks from '@/router/registry/Tasks'
@@ -11,6 +12,10 @@ export default [{
   children: [{
     path: '',
     name: 'registry',
+    component: Description
+  }, {
+    path: 'workers',
+    name: 'workers',
     component: Workers
   }, {
     path: 'worker/:worker',

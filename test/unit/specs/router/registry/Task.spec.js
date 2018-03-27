@@ -27,7 +27,8 @@ describe('Task.vue', () => {
   beforeEach(() => {
     getters = {
       task: () => ({name: 'task', needs: [{name: 'need'}]}),
-      worker: () => ({name: 'worker'})
+      worker: () => ({name: 'worker'}),
+      registryWorkers: () => []
     }
     actions = {
       query: jest.fn()
@@ -57,5 +58,16 @@ describe('Task.vue', () => {
     getters.task = () => (null)
     wrap()
     expect($router.push).toHaveBeenCalledWith('/notFound')
+  })
+
+  describe('registryTask', () => {
+    it('should get task', () => {
+      getters.registryWorkers = () => [{
+        name: 'worker',
+        tasks: [{name: 'task'}]
+      }]
+      const wrapper = wrap()
+      expect(wrapper.vm.registryTask).not.toBeNull()
+    })
   })
 })

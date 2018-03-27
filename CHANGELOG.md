@@ -22,6 +22,7 @@ All notable changes to this project will be documented in this file.
 - Add Sandbox page
 - Create module registry
 - Create Instruction editor in sandbox page
+- Description and json viewer
 
 ### Fixed
 

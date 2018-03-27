@@ -16,14 +16,23 @@ export {
  /**
   * createScriptor - Instanciate a scriptor from a registry worker array
   * @module default
-  * @param {worker[]} workers Array of workers
+  * @param {worker[]|scriptorData} data Object with array of workers
   * @return {Scriptor}     A newly created scriptor
   */
-function createScriptor (workers) {
-  const registry = new Registry(workers)
+function createScriptor (data) {
+  let temp = data
+  if (data && data.workers) temp = data.workers
+  const registry = new Registry(temp)
   const scriptor = new Scriptor(registry)
   return scriptor
 }
+
+ /**
+  * Expected format data object
+  * @typedef {object} scriptorData
+  * @global
+  * @property {worker[]} workers Array of workers
+  */
 
  /**
   * Expected format for a worker

@@ -10,10 +10,6 @@ function validateInstruction (scriptor) {
   let functional = validators.functional.instruction(scriptor)
 
   return (type, obj) => {
-    if (!INSTRUCTION[type]) {
-      throw new Error('Instruction type not defined')
-    }
-
     let result = schema(type, obj)
     if (result.status > 0) throw new ScriptorError('Cannot validate instruction schema', result.errors)
     result = functional(type, obj)
@@ -34,7 +30,8 @@ function createInstruction (scriptor, add = true) {
           workerId: obj.instance.workerId
         })
       })
-    } else if (type === INSTRUCTION.CALL_TASK) {
+    } else {
+      // type === INSTRUCTION.CALL_TASK
       instruction = new InstructionCallTask({
         instanceId: obj.instanceId,
         taskId: obj.taskId,

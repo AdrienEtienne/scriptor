@@ -26,7 +26,8 @@ const wrap = () => {
 describe('Worker.vue', () => {
   beforeEach(() => {
     getters = {
-      worker: jest.fn().mockReturnValue({name: 'worker'})
+      worker: jest.fn().mockReturnValue({name: 'worker'}),
+      registryWorkers: () => []
     }
     actions = {
       query: jest.fn()
@@ -50,5 +51,13 @@ describe('Worker.vue', () => {
     getters.worker = () => (null)
     wrap()
     expect($router.push).toHaveBeenCalledWith('/notFound')
+  })
+
+  describe('registryWorker', () => {
+    it('should get worker', () => {
+      getters.registryWorkers = () => [{ name: 'worker' }]
+      const wrapper = wrap()
+      expect(wrapper.vm.registryWorker).not.toBeNull()
+    })
   })
 })
